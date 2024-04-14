@@ -1,8 +1,1 @@
-enum SharedPreferencesEnum {
-  auth,
-  location,
-  readEvents,
-  topics,
-  lastLatitude,
-  lastLongitude
-}
+enum SharedPreferencesEnum { sample }
