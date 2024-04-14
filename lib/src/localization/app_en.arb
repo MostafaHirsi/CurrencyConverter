@@ -1,0 +1,6 @@
+{
+  "appTitle": "currency_converter",
+  "@appTitle": {
+    "description": "The title of the application"
+  }
+}
