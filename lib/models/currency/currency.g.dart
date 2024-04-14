@@ -10,20 +10,22 @@ _$CurrencyImpl _$$CurrencyImplFromJson(Map<String, dynamic> json) =>
     _$CurrencyImpl(
       symbol: json['symbol'] as String,
       name: json['name'] as String,
-      symbolNative: json['symbolNative'] as String,
-      decimalDigits: json['decimalDigits'] as int,
+      symbolNative: json['symbol_native'] as String,
+      decimalDigits: json['decimal_digits'] as int,
       rounding: json['rounding'] as int,
       code: json['code'] as String,
-      namePlural: json['namePlural'] as String,
+      namePlural: json['name_plural'] as String,
+      type: json['type'] as String,
     );
 
 Map<String, dynamic> _$$CurrencyImplToJson(_$CurrencyImpl instance) =>
     <String, dynamic>{
       'symbol': instance.symbol,
       'name': instance.name,
-      'symbolNative': instance.symbolNative,
-      'decimalDigits': instance.decimalDigits,
+      'symbol_native': instance.symbolNative,
+      'decimal_digits': instance.decimalDigits,
       'rounding': instance.rounding,
       'code': instance.code,
-      'namePlural': instance.namePlural,
+      'name_plural': instance.namePlural,
+      'type': instance.type,
     };

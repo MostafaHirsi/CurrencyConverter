@@ -5,7 +5,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:currency_converter/blocs/app/app_bloc.dart';
 import 'package:injector/injector.dart';
 
-import 'providers/backend/backend_provider.dart';
+import 'providers/currency_api_provider/currency_api_provider.dart';
 import 'providers/shared_preferences/shared_preferences_provider.dart';
 import 'settings/settings_controller.dart';
 import 'settings/settings_view.dart';
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    BackendProvider backendProvider = Injector.appInstance.get();
+    CurrencyApiProvider backendProvider = Injector.appInstance.get();
     SharedPreferencesProvider sharedPreferencesProvider =
         Injector.appInstance.get();
     AppBloc appBloc = AppBloc(backendProvider, sharedPreferencesProvider);

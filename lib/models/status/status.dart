@@ -8,7 +8,7 @@ part 'status.g.dart';
 @freezed
 class Status with _$Status {
   const factory Status({
-    required String accountId,
+    required int accountId,
     required Quotas quotas,
   }) = _Status;
 

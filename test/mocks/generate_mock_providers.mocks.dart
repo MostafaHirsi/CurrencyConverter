@@ -3,16 +3,21 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i5;
+import 'dart:async' as _i7;
 
-import 'package:currency_converter/providers/backend/backend_provider.dart'
-    as _i2;
-import 'package:currency_converter/providers/shared_preferences/shared_preferences_provider.dart'
+import 'package:currency_converter/models/currency_list/currency_list.dart'
+    as _i3;
+import 'package:currency_converter/models/exchange_rate/exchange_rate.dart'
     as _i4;
+import 'package:currency_converter/models/status/status.dart' as _i2;
+import 'package:currency_converter/providers/currency_api_provider/currency_api_provider.dart'
+    as _i5;
+import 'package:currency_converter/providers/shared_preferences/shared_preferences_provider.dart'
+    as _i8;
 import 'package:currency_converter/utils/shared_preferences_constants.dart'
-    as _i6;
+    as _i9;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i3;
+import 'package:mockito/src/dummies.dart' as _i6;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -27,46 +32,125 @@ import 'package:mockito/src/dummies.dart' as _i3;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-/// A class which mocks [BackendProvider].
+class _FakeStatus_0 extends _i1.SmartFake implements _i2.Status {
+  _FakeStatus_0(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeCurrencyList_1 extends _i1.SmartFake implements _i3.CurrencyList {
+  _FakeCurrencyList_1(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeExchangeRate_2 extends _i1.SmartFake implements _i4.ExchangeRate {
+  _FakeExchangeRate_2(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+/// A class which mocks [CurrencyApiProvider].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockBackendProvider extends _i1.Mock implements _i2.BackendProvider {
-  MockBackendProvider() {
+class MockCurrencyApiProvider extends _i1.Mock
+    implements _i5.CurrencyApiProvider {
+  MockCurrencyApiProvider() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
   String get endpoint => (super.noSuchMethod(
         Invocation.getter(#endpoint),
-        returnValue: _i3.dummyValue<String>(
+        returnValue: _i6.dummyValue<String>(
           this,
           Invocation.getter(#endpoint),
         ),
       ) as String);
+
+  @override
+  _i7.Future<_i2.Status> getStatus() => (super.noSuchMethod(
+        Invocation.method(
+          #getStatus,
+          [],
+        ),
+        returnValue: _i7.Future<_i2.Status>.value(_FakeStatus_0(
+          this,
+          Invocation.method(
+            #getStatus,
+            [],
+          ),
+        )),
+      ) as _i7.Future<_i2.Status>);
+
+  @override
+  _i7.Future<_i3.CurrencyList> getCurrencies() => (super.noSuchMethod(
+        Invocation.method(
+          #getCurrencies,
+          [],
+        ),
+        returnValue: _i7.Future<_i3.CurrencyList>.value(_FakeCurrencyList_1(
+          this,
+          Invocation.method(
+            #getCurrencies,
+            [],
+          ),
+        )),
+      ) as _i7.Future<_i3.CurrencyList>);
+
+  @override
+  _i7.Future<_i4.ExchangeRate> getExchangeRate({String? baseCurrency}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getExchangeRate,
+          [],
+          {#baseCurrency: baseCurrency},
+        ),
+        returnValue: _i7.Future<_i4.ExchangeRate>.value(_FakeExchangeRate_2(
+          this,
+          Invocation.method(
+            #getExchangeRate,
+            [],
+            {#baseCurrency: baseCurrency},
+          ),
+        )),
+      ) as _i7.Future<_i4.ExchangeRate>);
 }
 
 /// A class which mocks [SharedPreferencesProvider].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockSharedPreferencesProvider<T> extends _i1.Mock
-    implements _i4.SharedPreferencesProvider<T> {
+    implements _i8.SharedPreferencesProvider<T> {
   MockSharedPreferencesProvider() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i5.Future<void> initialise() => (super.noSuchMethod(
+  _i7.Future<void> initialise() => (super.noSuchMethod(
         Invocation.method(
           #initialise,
           [],
         ),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
 
   @override
   dynamic set(
-    _i6.SharedPreferencesEnum? key,
+    _i9.SharedPreferencesEnum? key,
     T? value,
   ) =>
       super.noSuchMethod(Invocation.method(
@@ -78,12 +162,12 @@ class MockSharedPreferencesProvider<T> extends _i1.Mock
       ));
 
   @override
-  T get(_i6.SharedPreferencesEnum? key) => (super.noSuchMethod(
+  T get(_i9.SharedPreferencesEnum? key) => (super.noSuchMethod(
         Invocation.method(
           #get,
           [key],
         ),
-        returnValue: _i3.dummyValue<T>(
+        returnValue: _i6.dummyValue<T>(
           this,
           Invocation.method(
             #get,
@@ -93,7 +177,7 @@ class MockSharedPreferencesProvider<T> extends _i1.Mock
       ) as T);
 
   @override
-  dynamic containsKey(_i6.SharedPreferencesEnum? key) =>
+  dynamic containsKey(_i9.SharedPreferencesEnum? key) =>
       super.noSuchMethod(Invocation.method(
         #containsKey,
         [key],

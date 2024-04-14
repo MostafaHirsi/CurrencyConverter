@@ -1,0 +1,7 @@
+{
+  "account_id": 302030841293443072,
+  "quotas": {
+    "month": { "total": 5000, "used": 7, "remaining": 4993 },
+    "grace": { "total": 0, "used": 0, "remaining": 0 }
+  }
+}

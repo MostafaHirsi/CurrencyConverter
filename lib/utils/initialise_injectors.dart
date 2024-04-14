@@ -1,6 +1,8 @@
-import 'package:currency_converter/providers/backend/backend_provider.dart';
-import '../providers/shared_preferences/shared_preferences_provider.dart';
+import 'package:currency_converter/models/env/env.dart';
+import 'package:currency_converter/providers/currency_api_provider/currency_api_provider.dart';
+import 'package:dio/dio.dart';
 import 'package:injector/injector.dart';
+import '../providers/shared_preferences/shared_preferences_provider.dart';
 
 Future<void> initialiseInjectors() async {
   SharedPreferencesProvider sharedPreferencesProvider =
@@ -9,6 +11,11 @@ Future<void> initialiseInjectors() async {
   Injector.appInstance.registerSingleton<SharedPreferencesProvider>(
       () => sharedPreferencesProvider);
 
+  Dio dio = Dio();
+  dio.options = BaseOptions(queryParameters: {
+    "apikey": Env.currencyApiKey,
+  });
+  CurrencyApiProvider currencyApiProvider = CurrencyApiProvider(dio);
   Injector.appInstance
-      .registerSingleton<BackendProvider>(() => BackendProvider());
+      .registerSingleton<CurrencyApiProvider>(() => currencyApiProvider);
 }

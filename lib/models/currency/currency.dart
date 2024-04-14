@@ -14,6 +14,7 @@ class Currency with _$Currency {
     required int rounding,
     required String code,
     required String namePlural,
+    required String type,
   }) = _Currency;
 
   factory Currency.fromJson(Map<String, Object?> json) =>

@@ -20,7 +20,7 @@ Status _$StatusFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Status {
-  String get accountId => throw _privateConstructorUsedError;
+  int get accountId => throw _privateConstructorUsedError;
   Quotas get quotas => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -33,7 +33,7 @@ abstract class $StatusCopyWith<$Res> {
   factory $StatusCopyWith(Status value, $Res Function(Status) then) =
       _$StatusCopyWithImpl<$Res, Status>;
   @useResult
-  $Res call({String accountId, Quotas quotas});
+  $Res call({int accountId, Quotas quotas});
 
   $QuotasCopyWith<$Res> get quotas;
 }
@@ -58,7 +58,7 @@ class _$StatusCopyWithImpl<$Res, $Val extends Status>
       accountId: null == accountId
           ? _value.accountId
           : accountId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       quotas: null == quotas
           ? _value.quotas
           : quotas // ignore: cast_nullable_to_non_nullable
@@ -82,7 +82,7 @@ abstract class _$$StatusImplCopyWith<$Res> implements $StatusCopyWith<$Res> {
       __$$StatusImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String accountId, Quotas quotas});
+  $Res call({int accountId, Quotas quotas});
 
   @override
   $QuotasCopyWith<$Res> get quotas;
@@ -106,7 +106,7 @@ class __$$StatusImplCopyWithImpl<$Res>
       accountId: null == accountId
           ? _value.accountId
           : accountId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       quotas: null == quotas
           ? _value.quotas
           : quotas // ignore: cast_nullable_to_non_nullable
@@ -124,7 +124,7 @@ class _$StatusImpl with DiagnosticableTreeMixin implements _Status {
       _$$StatusImplFromJson(json);
 
   @override
-  final String accountId;
+  final int accountId;
   @override
   final Quotas quotas;
 
@@ -172,13 +172,13 @@ class _$StatusImpl with DiagnosticableTreeMixin implements _Status {
 
 abstract class _Status implements Status {
   const factory _Status(
-      {required final String accountId,
+      {required final int accountId,
       required final Quotas quotas}) = _$StatusImpl;
 
   factory _Status.fromJson(Map<String, dynamic> json) = _$StatusImpl.fromJson;
 
   @override
-  String get accountId;
+  int get accountId;
   @override
   Quotas get quotas;
   @override

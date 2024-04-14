@@ -27,6 +27,7 @@ mixin _$Currency {
   int get rounding => throw _privateConstructorUsedError;
   String get code => throw _privateConstructorUsedError;
   String get namePlural => throw _privateConstructorUsedError;
+  String get type => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -46,7 +47,8 @@ abstract class $CurrencyCopyWith<$Res> {
       int decimalDigits,
       int rounding,
       String code,
-      String namePlural});
+      String namePlural,
+      String type});
 }
 
 /// @nodoc
@@ -69,6 +71,7 @@ class _$CurrencyCopyWithImpl<$Res, $Val extends Currency>
     Object? rounding = null,
     Object? code = null,
     Object? namePlural = null,
+    Object? type = null,
   }) {
     return _then(_value.copyWith(
       symbol: null == symbol
@@ -99,6 +102,10 @@ class _$CurrencyCopyWithImpl<$Res, $Val extends Currency>
           ? _value.namePlural
           : namePlural // ignore: cast_nullable_to_non_nullable
               as String,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -118,7 +125,8 @@ abstract class _$$CurrencyImplCopyWith<$Res>
       int decimalDigits,
       int rounding,
       String code,
-      String namePlural});
+      String namePlural,
+      String type});
 }
 
 /// @nodoc
@@ -139,6 +147,7 @@ class __$$CurrencyImplCopyWithImpl<$Res>
     Object? rounding = null,
     Object? code = null,
     Object? namePlural = null,
+    Object? type = null,
   }) {
     return _then(_$CurrencyImpl(
       symbol: null == symbol
@@ -169,6 +178,10 @@ class __$$CurrencyImplCopyWithImpl<$Res>
           ? _value.namePlural
           : namePlural // ignore: cast_nullable_to_non_nullable
               as String,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -183,7 +196,8 @@ class _$CurrencyImpl with DiagnosticableTreeMixin implements _Currency {
       required this.decimalDigits,
       required this.rounding,
       required this.code,
-      required this.namePlural});
+      required this.namePlural,
+      required this.type});
 
   factory _$CurrencyImpl.fromJson(Map<String, dynamic> json) =>
       _$$CurrencyImplFromJson(json);
@@ -202,10 +216,12 @@ class _$CurrencyImpl with DiagnosticableTreeMixin implements _Currency {
   final String code;
   @override
   final String namePlural;
+  @override
+  final String type;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Currency(symbol: $symbol, name: $name, symbolNative: $symbolNative, decimalDigits: $decimalDigits, rounding: $rounding, code: $code, namePlural: $namePlural)';
+    return 'Currency(symbol: $symbol, name: $name, symbolNative: $symbolNative, decimalDigits: $decimalDigits, rounding: $rounding, code: $code, namePlural: $namePlural, type: $type)';
   }
 
   @override
@@ -219,7 +235,8 @@ class _$CurrencyImpl with DiagnosticableTreeMixin implements _Currency {
       ..add(DiagnosticsProperty('decimalDigits', decimalDigits))
       ..add(DiagnosticsProperty('rounding', rounding))
       ..add(DiagnosticsProperty('code', code))
-      ..add(DiagnosticsProperty('namePlural', namePlural));
+      ..add(DiagnosticsProperty('namePlural', namePlural))
+      ..add(DiagnosticsProperty('type', type));
   }
 
   @override
@@ -237,13 +254,14 @@ class _$CurrencyImpl with DiagnosticableTreeMixin implements _Currency {
                 other.rounding == rounding) &&
             (identical(other.code, code) || other.code == code) &&
             (identical(other.namePlural, namePlural) ||
-                other.namePlural == namePlural));
+                other.namePlural == namePlural) &&
+            (identical(other.type, type) || other.type == type));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, symbol, name, symbolNative,
-      decimalDigits, rounding, code, namePlural);
+      decimalDigits, rounding, code, namePlural, type);
 
   @JsonKey(ignore: true)
   @override
@@ -267,7 +285,8 @@ abstract class _Currency implements Currency {
       required final int decimalDigits,
       required final int rounding,
       required final String code,
-      required final String namePlural}) = _$CurrencyImpl;
+      required final String namePlural,
+      required final String type}) = _$CurrencyImpl;
 
   factory _Currency.fromJson(Map<String, dynamic> json) =
       _$CurrencyImpl.fromJson;
@@ -286,6 +305,8 @@ abstract class _Currency implements Currency {
   String get code;
   @override
   String get namePlural;
+  @override
+  String get type;
   @override
   @JsonKey(ignore: true)
   _$$CurrencyImplCopyWith<_$CurrencyImpl> get copyWith =>

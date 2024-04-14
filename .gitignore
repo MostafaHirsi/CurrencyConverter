@@ -46,3 +46,8 @@ app.*.map.json
 # iOS
 *.*.dSYM.zip
 *.ipa
+
+# environnment file
+*.env
+
+env.g.dart
