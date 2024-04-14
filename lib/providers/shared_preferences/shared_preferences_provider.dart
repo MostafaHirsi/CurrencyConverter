@@ -1,4 +1,4 @@
-import 'package:currency_converter/src/utils/shared_preferences_constants.dart';
+import 'package:currency_converter/utils/shared_preferences_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreferencesProvider<T> {

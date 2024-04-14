@@ -5,11 +5,11 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i5;
 
-import 'package:currency_converter/src/providers/backend/backend_provider.dart'
+import 'package:currency_converter/providers/backend/backend_provider.dart'
     as _i2;
-import 'package:currency_converter/src/providers/shared_preferences/shared_preferences_provider.dart'
+import 'package:currency_converter/providers/shared_preferences/shared_preferences_provider.dart'
     as _i4;
-import 'package:currency_converter/src/utils/shared_preferences_constants.dart'
+import 'package:currency_converter/utils/shared_preferences_constants.dart'
     as _i6;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i3;

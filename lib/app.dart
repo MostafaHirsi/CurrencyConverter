@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:currency_converter/src/blocs/app/app_bloc.dart';
+import 'package:currency_converter/blocs/app/app_bloc.dart';
 import 'package:injector/injector.dart';
 
 import 'providers/backend/backend_provider.dart';

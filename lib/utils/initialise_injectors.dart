@@ -1,4 +1,4 @@
-import 'package:currency_converter/src/providers/backend/backend_provider.dart';
+import 'package:currency_converter/providers/backend/backend_provider.dart';
 import '../providers/shared_preferences/shared_preferences_provider.dart';
 import 'package:injector/injector.dart';
 
