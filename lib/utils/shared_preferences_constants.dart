@@ -1,1 +1,1 @@
-enum SharedPreferencesEnum { sample }
+enum SharedPreferencesEnum { previousQuotes }

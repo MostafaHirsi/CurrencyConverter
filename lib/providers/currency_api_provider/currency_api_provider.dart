@@ -1,6 +1,4 @@
-import 'package:currency_converter/models/currency/currency.dart';
 import 'package:currency_converter/models/currency_list/currency_list.dart';
-import 'package:currency_converter/models/env/env.dart';
 import 'package:currency_converter/models/exchange_rate/exchange_rate.dart';
 import 'package:currency_converter/models/status/status.dart';
 import 'package:dio/dio.dart';

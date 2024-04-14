@@ -111,7 +111,8 @@ class MockCurrencyApiProvider extends _i1.Mock
       ) as _i7.Future<_i3.CurrencyList>);
 
   @override
-  _i7.Future<_i4.ExchangeRate> getExchangeRate({String? baseCurrency}) =>
+  _i7.Future<_i4.ExchangeRate> getExchangeRate(
+          {String? baseCurrency = r'USD'}) =>
       (super.noSuchMethod(
         Invocation.method(
           #getExchangeRate,
