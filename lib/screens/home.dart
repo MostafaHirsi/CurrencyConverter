@@ -1,3 +1,5 @@
+import 'package:currency_converter/utils/colors.dart';
+import 'package:currency_converter/widgets/flip_button.dart';
 import 'package:currency_converter/widgets/number_input.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +27,17 @@ class _HomeState extends State<Home> {
               textEditingController: textEditingController,
               symbol: '\$',
             ),
-            Divider(),
+            Stack(
+              alignment: Alignment.center,
+              children: [
+                const Divider(
+                  color: AppColors.grey,
+                ),
+                FlipButton(
+                  onPress: () {},
+                )
+              ],
+            ),
             NumberInput(
               textEditingController: textEditingController,
               symbol: '\$',

@@ -47,6 +47,7 @@ class App extends StatelessWidget {
             themeMode: settingsController.themeMode,
             theme: ThemeData(
               textTheme: GoogleFonts.montserratTextTheme(),
+              splashFactory: NoSplash.splashFactory,
             ),
             darkTheme: ThemeData.dark().copyWith(
               textTheme:
