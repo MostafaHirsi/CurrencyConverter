@@ -2,6 +2,7 @@ import 'package:currency_converter/models/currency/currency.dart';
 import 'package:currency_converter/widgets/currency_button.dart';
 import 'package:currency_converter/widgets/flip_button.dart';
 import 'package:currency_converter/widgets/number_input.dart';
+import 'package:currency_converter/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -40,7 +41,7 @@ class _HomeState extends State<Home> {
       appBar: AppBar(),
       body: Container(
         padding: const EdgeInsets.symmetric(
-          horizontal: 14,
+          horizontal: 18,
           vertical: 8,
         ),
         child: Column(
@@ -81,6 +82,14 @@ class _HomeState extends State<Home> {
               symbol: gbpCurrency.symbol,
               enabled: false,
             ),
+            const Spacer(),
+            Center(
+              child: PrimaryButton(
+                text: 'Convert',
+                onPress: () {},
+                isLoading: true,
+              ),
+            )
           ],
         ),
       ),

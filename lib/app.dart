@@ -1,13 +1,11 @@
 import 'package:currency_converter/screens/home.dart';
 import 'package:currency_converter/utils/colors.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:currency_converter/blocs/app/app_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:injector/injector.dart';
 
 import 'providers/currency_api_provider/currency_api_provider.dart';
@@ -69,6 +67,26 @@ class App extends StatelessWidget {
                     foregroundColor: Colors.black,
                   ),
                 ),
+                progressIndicatorTheme: const ProgressIndicatorThemeData(
+                  color: Colors.grey,
+                ),
+                elevatedButtonTheme: ElevatedButtonThemeData(
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 48,
+                    ),
+                    backgroundColor: AppColors.orange,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(
+                          6,
+                        ),
+                      ),
+                    ),
+                    foregroundColor: Colors.white,
+                    disabledForegroundColor: Colors.grey,
+                  ),
+                ),
                 iconTheme: const IconThemeData(
                   color: Colors.black,
                 ),
@@ -78,6 +96,9 @@ class App extends StatelessWidget {
                 appBarTheme: const AppBarTheme(
                   color: Colors.black,
                 ),
+                progressIndicatorTheme: const ProgressIndicatorThemeData(
+                  color: Colors.grey,
+                ),
                 dividerColor: AppColors.darkerGrey,
                 outlinedButtonTheme: OutlinedButtonThemeData(
                   style: OutlinedButton.styleFrom(
@@ -86,6 +107,23 @@ class App extends StatelessWidget {
                     side: BorderSide.none,
                     padding: const EdgeInsets.all(12),
                     foregroundColor: Colors.white,
+                  ),
+                ),
+                elevatedButtonTheme: ElevatedButtonThemeData(
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 0,
+                    ),
+                    backgroundColor: AppColors.orange,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(
+                          6,
+                        ),
+                      ),
+                    ),
+                    foregroundColor: Colors.white,
+                    disabledForegroundColor: Colors.grey,
                   ),
                 ),
                 iconTheme: const IconThemeData(
