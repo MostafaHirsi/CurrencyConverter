@@ -17,7 +17,7 @@ dependencies:
   dio: ^5.3.3
   sprintf: ^7.0.0
   lucide_icons: ^0.257.0
-  google_fonts: ^6.1.0
+  google_fonts: ^6.2.1
   shared_preferences: ^2.2.2
   intl: ^0.18.0
   flutter_svg: ^2.0.9
@@ -34,6 +34,7 @@ dependencies:
   equatable: ^2.0.5
   envied: ^0.5.4+1
   http_mock_adapter: ^0.6.1
+  currency_text_input_formatter: ^2.1.11
 
 dev_dependencies:
   flutter_test:

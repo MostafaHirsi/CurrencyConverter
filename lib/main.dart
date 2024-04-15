@@ -11,5 +11,5 @@ void main() async {
 
   await initialiseInjectors();
 
-  runApp(MyApp(settingsController: settingsController));
+  runApp(App(settingsController: settingsController));
 }
