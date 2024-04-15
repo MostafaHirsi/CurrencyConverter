@@ -62,7 +62,7 @@ class App extends StatelessWidget {
                 dividerColor: AppColors.grey,
                 outlinedButtonTheme: OutlinedButtonThemeData(
                   style: OutlinedButton.styleFrom(
-                    backgroundColor: Colors.orange,
+                    backgroundColor: AppColors.grey,
                     shape: const CircleBorder(),
                     side: BorderSide.none,
                     padding: const EdgeInsets.all(12),
