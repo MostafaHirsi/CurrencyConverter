@@ -30,9 +30,7 @@ class _HomeState extends State<Home> {
             Stack(
               alignment: Alignment.center,
               children: [
-                const Divider(
-                  color: AppColors.grey,
-                ),
+                const Divider(),
                 FlipButton(
                   onPress: () {},
                 )

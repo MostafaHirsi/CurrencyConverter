@@ -1,9 +1,12 @@
 import 'package:currency_converter/screens/home.dart';
+import 'package:currency_converter/utils/colors.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:currency_converter/blocs/app/app_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:injector/injector.dart';
 
@@ -26,48 +29,85 @@ class App extends StatelessWidget {
     SharedPreferencesProvider sharedPreferencesProvider =
         Injector.appInstance.get();
     AppBloc appBloc = AppBloc(backendProvider, sharedPreferencesProvider);
-    return BlocProvider(
-      create: (context) => appBloc,
-      child: AnimatedBuilder(
-        animation: settingsController,
-        builder: (BuildContext context, Widget? child) {
-          return MaterialApp(
-            restorationScopeId: 'app',
-            localizationsDelegates: const [
-              AppLocalizations.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            supportedLocales: const [
-              Locale('en', ''),
-            ],
-            onGenerateTitle: (BuildContext context) =>
-                AppLocalizations.of(context)!.appTitle,
-            themeMode: settingsController.themeMode,
-            theme: ThemeData(
-              textTheme: GoogleFonts.montserratTextTheme(),
-              splashFactory: NoSplash.splashFactory,
-            ),
-            darkTheme: ThemeData.dark().copyWith(
-              textTheme:
-                  GoogleFonts.montserratTextTheme(ThemeData.dark().textTheme),
-            ),
-            onGenerateRoute: (RouteSettings routeSettings) {
-              return MaterialPageRoute<void>(
-                settings: routeSettings,
-                builder: (BuildContext context) {
-                  switch (routeSettings.name) {
-                    case SettingsView.routeName:
-                      return SettingsView(controller: settingsController);
-                    default:
-                      return const Home();
-                  }
-                },
-              );
-            },
-          );
-        },
+    SvgTheme svgTheme = SvgTheme(
+      currentColor: settingsController.themeMode == ThemeMode.dark
+          ? AppColors.white
+          : AppColors.black,
+    );
+    return DefaultSvgTheme(
+      theme: svgTheme,
+      child: BlocProvider(
+        create: (context) => appBloc,
+        child: AnimatedBuilder(
+          animation: settingsController,
+          builder: (BuildContext context, Widget? child) {
+            return MaterialApp(
+              restorationScopeId: 'app',
+              localizationsDelegates: const [
+                AppLocalizations.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              supportedLocales: const [
+                Locale('en', ''),
+              ],
+              onGenerateTitle: (BuildContext context) =>
+                  AppLocalizations.of(context)!.appTitle,
+              themeMode: settingsController.themeMode,
+              theme: ThemeData(
+                useMaterial3: true,
+                fontFamily: 'Montserrat',
+                splashFactory: NoSplash.splashFactory,
+                dividerColor: AppColors.grey,
+                outlinedButtonTheme: OutlinedButtonThemeData(
+                  style: OutlinedButton.styleFrom(
+                    backgroundColor: Colors.orange,
+                    shape: const CircleBorder(),
+                    side: BorderSide.none,
+                    padding: const EdgeInsets.all(12),
+                    foregroundColor: Colors.black,
+                  ),
+                ),
+                iconTheme: const IconThemeData(
+                  color: Colors.black,
+                ),
+              ),
+              darkTheme: ThemeData.dark().copyWith(
+                scaffoldBackgroundColor: Colors.black,
+                appBarTheme: const AppBarTheme(
+                  color: Colors.black,
+                ),
+                dividerColor: AppColors.darkerGrey,
+                outlinedButtonTheme: OutlinedButtonThemeData(
+                  style: OutlinedButton.styleFrom(
+                    backgroundColor: AppColors.darkerGrey,
+                    shape: const CircleBorder(),
+                    side: BorderSide.none,
+                    padding: const EdgeInsets.all(12),
+                    foregroundColor: Colors.white,
+                  ),
+                ),
+                iconTheme: const IconThemeData(
+                  color: Colors.white,
+                ),
+              ),
+              onGenerateRoute: (RouteSettings routeSettings) {
+                return MaterialPageRoute<void>(
+                  settings: routeSettings,
+                  builder: (BuildContext context) {
+                    switch (routeSettings.name) {
+                      case SettingsView.routeName:
+                        return SettingsView(controller: settingsController);
+                      default:
+                        return const Home();
+                    }
+                  },
+                );
+              },
+            );
+          },
+        ),
       ),
     );
   }

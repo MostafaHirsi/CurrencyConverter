@@ -1,5 +1,6 @@
 import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'package:intl/intl.dart';
 
@@ -22,23 +23,21 @@ class NumberInput extends StatelessWidget {
       String formattedValue = formatter.format('0.00');
       textEditingController.text = formattedValue;
     }
-    return Container(
-      margin: const EdgeInsets.all(12),
-      child: TextField(
-        enabled: enabled,
-        keyboardType: TextInputType.number,
-        inputFormatters: [formatter],
-        style: const TextStyle(
-          fontSize: 46,
-          letterSpacing: -1,
-        ),
-        decoration: const InputDecoration(
-          border: UnderlineInputBorder(
-            borderSide: BorderSide.none,
-          ),
-        ),
-        controller: textEditingController,
+    return TextField(
+      enabled: enabled,
+      keyboardType: TextInputType.number,
+      inputFormatters: [formatter],
+      style: const TextStyle(
+        fontSize: 60,
+        letterSpacing: -4,
+        fontWeight: FontWeight.w300,
       ),
+      decoration: const InputDecoration(
+        border: UnderlineInputBorder(
+          borderSide: BorderSide.none,
+        ),
+      ),
+      controller: textEditingController,
     );
   }
 }
