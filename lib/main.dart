@@ -1,15 +1,25 @@
+import 'package:currency_converter/blocs/app/app_bloc.dart';
+import 'package:currency_converter/providers/currency_api_provider/currency_api_provider.dart';
+import 'package:currency_converter/providers/shared_preferences/shared_preferences_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:currency_converter/utils/initialise_injectors.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injector/injector.dart';
 import 'app.dart';
-import 'settings/settings_controller.dart';
-import 'settings/settings_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final settingsController = SettingsController(SettingsService());
-  await settingsController.loadSettings();
 
   await initialiseInjectors();
 
-  runApp(App(settingsController: settingsController));
+  CurrencyApiProvider backendProvider = Injector.appInstance.get();
+  SharedPreferencesProvider sharedPreferencesProvider =
+      Injector.appInstance.get();
+  AppBloc appBloc = AppBloc(backendProvider, sharedPreferencesProvider);
+  runApp(
+    BlocProvider(
+      create: (context) => appBloc,
+      child: const App(),
+    ),
+  );
 }

@@ -1,4 +1,5 @@
 import 'package:currency_converter/models/currency/currency.dart';
+import 'package:currency_converter/screens/settings.dart';
 import 'package:currency_converter/widgets/currency_button.dart';
 import 'package:currency_converter/widgets/flip_button.dart';
 import 'package:currency_converter/widgets/number_input.dart';
@@ -38,7 +39,16 @@ class _HomeState extends State<Home> {
       "type": "fiat"
     });
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: () => {Navigator.pushNamed(context, Settings.routeName)},
+            icon: const Icon(
+              Icons.settings,
+            ),
+          )
+        ],
+      ),
       body: Container(
         padding: const EdgeInsets.symmetric(
           horizontal: 18,

@@ -8,7 +8,7 @@ class SharedPreferencesProvider<T> {
     _sharedPreferences = await SharedPreferences.getInstance();
   }
 
-  set(SharedPreferencesEnum key, T value) async {
+  Future<void> set(SharedPreferencesEnum key, T value) async {
     if (value is List) {
       List<String> stringList =
           value.map((listItem) => listItem.toString()).toList();

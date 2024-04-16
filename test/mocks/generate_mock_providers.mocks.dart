@@ -150,17 +150,21 @@ class MockSharedPreferencesProvider<T> extends _i1.Mock
       ) as _i7.Future<void>);
 
   @override
-  dynamic set(
+  _i7.Future<void> set(
     _i9.SharedPreferencesEnum? key,
     T? value,
   ) =>
-      super.noSuchMethod(Invocation.method(
-        #set,
-        [
-          key,
-          value,
-        ],
-      ));
+      (super.noSuchMethod(
+        Invocation.method(
+          #set,
+          [
+            key,
+            value,
+          ],
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
 
   @override
   T get(_i9.SharedPreferencesEnum? key) => (super.noSuchMethod(
