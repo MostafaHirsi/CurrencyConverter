@@ -7,7 +7,6 @@ import 'package:currency_converter/utils/shared_preferences_constants.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import '../../providers/currency_api_provider/currency_api_provider.dart';
 import '../../providers/shared_preferences/shared_preferences_provider.dart';
