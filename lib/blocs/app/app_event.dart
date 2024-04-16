@@ -1,7 +1,7 @@
 part of 'app_bloc.dart';
 
 @immutable
-sealed class AppEvent {}
+sealed class AppEvent extends Equatable {}
 
 final class LoadApp extends AppEvent {
   @override
