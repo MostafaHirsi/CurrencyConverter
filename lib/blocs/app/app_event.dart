@@ -15,3 +15,11 @@ final class UpdateThemeMode extends AppEvent {
   @override
   List<Object> get props => [themeMode];
 }
+
+final class UpdateLocale extends AppEvent {
+  final String locale;
+
+  UpdateLocale({required this.locale});
+  @override
+  List<Object> get props => [locale];
+}

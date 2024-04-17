@@ -1,6 +1,11 @@
 {
-  "appTitle": "currency_converter",
-  "@appTitle": {
-    "description": "The title of the application"
-  }
+  "appTitle": "Currency Converter",
+  "currenciesModalTitle": "Currencies",
+  "quoteModalTitle": "Previous Quotes",
+  "settingsTitle": "Settings",
+  "darkTheme": "Dark theme",
+  "lightTheme": "Light theme",
+  "auto": "Auto",
+  "language": "Language",
+  "theme": "Theme"
 }

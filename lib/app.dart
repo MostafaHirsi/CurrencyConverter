@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:currency_converter/blocs/app/app_bloc.dart';
 import 'package:currency_converter/blocs/home/home_bloc.dart';
 import 'package:currency_converter/models/currency/currency.dart';
@@ -32,6 +34,8 @@ class App extends StatelessWidget {
       builder: (context, state) {
         ThemeMode themeMode =
             state is AppLoaded ? state.themeMode : initialThemeMode;
+        String defaultLocale = Platform.localeName;
+        String locale = state is AppLoaded ? state.locale : defaultLocale;
         return MaterialApp(
           restorationScopeId: 'app',
           localizationsDelegates: const [
@@ -42,7 +46,9 @@ class App extends StatelessWidget {
           ],
           supportedLocales: const [
             Locale('en', ''),
+            Locale('fr', ''),
           ],
+          locale: Locale(locale),
           onGenerateTitle: (BuildContext context) =>
               AppLocalizations.of(context)!.appTitle,
           themeMode: themeMode,

@@ -1,1 +1,1 @@
-enum SharedPreferencesEnum { previousQuotes, currencies, themeMode }
+enum SharedPreferencesEnum { previousQuotes, currencies, themeMode, locale }

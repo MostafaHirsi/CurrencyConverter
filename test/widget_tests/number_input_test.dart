@@ -4,7 +4,6 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('NumberInput', () {
-    TextEditingController textEditingController = TextEditingController();
     group('when using the dollar symbol', () {
       String symbol = '\$';
       group('and value is 0', () {

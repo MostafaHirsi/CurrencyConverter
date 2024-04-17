@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:currency_converter/models/currency/currency.dart';
@@ -24,17 +25,29 @@ class AppBloc extends Bloc<AppEvent, AppState> {
       try {
         if (event is LoadApp) {
           emit(AppLoading());
+
+          String locale = retrieveLocale();
           List<Currency> currencies = await retrieveCurrencies();
           await storeCurrencies(currencies);
           ThemeMode themeMode = await retrieveThemeMode();
-          emit(AppLoaded(currencies, themeMode));
+          emit(AppLoaded(currencies, themeMode, locale));
         }
+
         if (event is UpdateThemeMode) {
+          String locale = retrieveLocale();
           ThemeMode themeMode = event.themeMode;
           await sharedPreferencesProvider.set(
               SharedPreferencesEnum.themeMode, themeMode.index);
           List<Currency> currencies = await retrieveCurrencies(fromCache: true);
-          emit(AppLoaded(currencies, themeMode));
+          emit(AppLoaded(currencies, themeMode, locale));
+        }
+
+        if (event is UpdateLocale) {
+          await updateLocale(event.locale);
+          String locale = retrieveLocale();
+          ThemeMode themeMode = await retrieveThemeMode();
+          List<Currency> currencies = await retrieveCurrencies(fromCache: true);
+          emit(AppLoaded(currencies, themeMode, locale));
         }
       } on DioException catch (dioException) {
         String errorMessage = "Something went wrong, please try again later.";
@@ -54,6 +67,18 @@ class AppBloc extends Bloc<AppEvent, AppState> {
       }
     });
     add(LoadApp());
+  }
+
+  String retrieveLocale() {
+    String defaultLocale = Platform.localeName;
+    String locale =
+        sharedPreferencesProvider.get(SharedPreferencesEnum.locale) ??
+            defaultLocale;
+    return locale;
+  }
+
+  Future<void> updateLocale(String locale) async {
+    await sharedPreferencesProvider.set(SharedPreferencesEnum.locale, locale);
   }
 
   Future<ThemeMode> retrieveThemeMode() async {

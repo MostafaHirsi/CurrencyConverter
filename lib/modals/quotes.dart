@@ -5,6 +5,7 @@ import 'package:currency_converter/utils/retrieve_quotes.dart';
 import 'package:flag/flag_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:injector/injector.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class QuotesModal extends StatelessWidget {
   final double iconSize = 20;
@@ -32,7 +33,7 @@ class QuotesModal extends StatelessWidget {
               bottom: 16,
             ),
             child: Text(
-              "Previous Quotes",
+              AppLocalizations.of(context)!.quoteModalTitle,
               style: Theme.of(context)
                   .textTheme
                   .titleLarge!

@@ -16,10 +16,11 @@ final class AppLoading extends AppState {
 final class AppLoaded extends AppState {
   final List<Currency> currencies;
   final ThemeMode themeMode;
+  final String locale;
 
-  AppLoaded(this.currencies, this.themeMode);
+  AppLoaded(this.currencies, this.themeMode, this.locale);
   @override
-  List<Object> get props => [currencies, themeMode];
+  List<Object> get props => [currencies, themeMode, locale];
 }
 
 final class AppError extends AppState {

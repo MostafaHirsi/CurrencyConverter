@@ -1,13 +1,15 @@
 import 'package:currency_converter/models/currency/currency.dart';
+import 'package:currency_converter/utils/language_local.dart';
+import 'package:flag/flag_enum.dart';
 import 'package:flag/flag_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class CurrenciesListModal extends StatelessWidget {
+class ThemeListModal extends StatelessWidget {
   final double iconSize = 20;
-  final List<Currency> currencies;
-  const CurrenciesListModal({super.key, required this.currencies});
+  final List<ThemeMode> themeModes;
+  const ThemeListModal({super.key, required this.themeModes});
 
   @override
   Widget build(BuildContext context) {
@@ -40,13 +42,12 @@ class CurrenciesListModal extends StatelessWidget {
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: currencies.length,
+              itemCount: themeModes.length,
               itemBuilder: (context, index) {
-                Currency currency = currencies[index];
-                String code = currency.code.substring(0, 2).toLowerCase();
+                ThemeMode themeMode = themeModes[index];
                 return Column(
                   children: [
-                    buildListTile(context, code, currency),
+                    buildListTile(context, themeMode),
                     buildDivider(),
                   ],
                 );
@@ -65,19 +66,12 @@ class CurrenciesListModal extends StatelessWidget {
     );
   }
 
-  ListTile buildListTile(BuildContext context, String code, Currency currency) {
+  ListTile buildListTile(BuildContext context, ThemeMode themeMode) {
     return ListTile(
-      onTap: () => Navigator.pop(context, currency),
+      onTap: () => Navigator.pop(context, themeMode),
       contentPadding: const EdgeInsets.symmetric(vertical: 4),
-      leading: Flag.fromString(
-        code,
-        width: iconSize,
-        height: iconSize,
-        borderRadius: 100,
-        fit: BoxFit.fitHeight,
-      ),
       title: Text(
-        '${currency.symbol} ${currency.code} - ${currency.name} ',
+        getThemeLabel(themeMode, context),
         style: const TextStyle(
           letterSpacing: 0,
           wordSpacing: 0,
@@ -86,5 +80,16 @@ class CurrenciesListModal extends StatelessWidget {
       ),
       trailing: const Icon(Icons.chevron_right),
     );
+  }
+
+  String getThemeLabel(ThemeMode themeMode, BuildContext context) {
+    switch (themeMode) {
+      case ThemeMode.light:
+        return AppLocalizations.of(context)!.lightTheme;
+      case ThemeMode.dark:
+        return AppLocalizations.of(context)!.darkTheme;
+      case ThemeMode.system:
+        return AppLocalizations.of(context)!.auto;
+    }
   }
 }

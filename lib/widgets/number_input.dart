@@ -1,7 +1,7 @@
+import 'dart:io';
+
 import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/material.dart';
-
-import 'package:intl/intl.dart';
 
 class NumberInput extends StatelessWidget {
   final double value;
@@ -17,9 +17,13 @@ class NumberInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String locale = Intl.getCurrentLocale();
+    String defaultLocale = Platform.localeName;
     CurrencyTextInputFormatter formatter = CurrencyTextInputFormatter(
-        symbol: symbol, locale: locale, decimalDigits: 2);
+      symbol: symbol,
+      locale: defaultLocale,
+      decimalDigits: 2,
+      inputDirection: InputDirection.right,
+    );
     TextEditingController controller =
         TextEditingController(text: formatter.formatDouble(value));
     controller.selection = TextSelection.fromPosition(

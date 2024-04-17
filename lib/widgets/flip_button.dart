@@ -1,7 +1,5 @@
-import 'package:currency_converter/utils/assets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class FlipButton extends StatelessWidget {
   final Function() onPress;

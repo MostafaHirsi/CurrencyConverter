@@ -1,13 +1,15 @@
 import 'package:currency_converter/models/currency/currency.dart';
+import 'package:currency_converter/utils/language_local.dart';
+import 'package:flag/flag_enum.dart';
 import 'package:flag/flag_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class CurrenciesListModal extends StatelessWidget {
+class LanguagesListModal extends StatelessWidget {
   final double iconSize = 20;
-  final List<Currency> currencies;
-  const CurrenciesListModal({super.key, required this.currencies});
+  final List<String> languageCodes;
+  const LanguagesListModal({super.key, required this.languageCodes});
 
   @override
   Widget build(BuildContext context) {
@@ -40,13 +42,12 @@ class CurrenciesListModal extends StatelessWidget {
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: currencies.length,
+              itemCount: languageCodes.length,
               itemBuilder: (context, index) {
-                Currency currency = currencies[index];
-                String code = currency.code.substring(0, 2).toLowerCase();
+                String languageCode = languageCodes[index];
                 return Column(
                   children: [
-                    buildListTile(context, code, currency),
+                    buildListTile(context, languageCode),
                     buildDivider(),
                   ],
                 );
@@ -65,19 +66,13 @@ class CurrenciesListModal extends StatelessWidget {
     );
   }
 
-  ListTile buildListTile(BuildContext context, String code, Currency currency) {
+  ListTile buildListTile(BuildContext context, String code) {
+    LanguageLocal languageLocal = LanguageLocal();
     return ListTile(
-      onTap: () => Navigator.pop(context, currency),
+      onTap: () => Navigator.pop(context, code),
       contentPadding: const EdgeInsets.symmetric(vertical: 4),
-      leading: Flag.fromString(
-        code,
-        width: iconSize,
-        height: iconSize,
-        borderRadius: 100,
-        fit: BoxFit.fitHeight,
-      ),
       title: Text(
-        '${currency.symbol} ${currency.code} - ${currency.name} ',
+        languageLocal.getDisplayLanguage(code),
         style: const TextStyle(
           letterSpacing: 0,
           wordSpacing: 0,

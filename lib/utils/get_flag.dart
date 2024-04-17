@@ -1,4 +1,3 @@
-import 'package:currency_converter/models/currency/currency.dart';
 import 'package:flag/flag_widget.dart';
 import 'package:flutter/material.dart';
 

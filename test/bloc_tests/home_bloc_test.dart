@@ -23,8 +23,6 @@ void main() {
       "name_plural": "Euros",
       "type": "fiat"
     });
-    HomeBloc homeBloc =
-        HomeBloc([euCurrency], currencyApiProvider, sharedPreferencesProvider);
 
     blocTest(
       'emits [] when nothing is added ',
