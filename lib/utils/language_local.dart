@@ -209,9 +209,10 @@ class LanguageLocal {
     "za": {"name": "Zhuang, Chuang", "nativeName": "Saɯ cueŋƅ, Saw cuengh"}
   };
 
-  getDisplayLanguage(key) {
-    if (isoLangs.containsKey(key)) {
-      return isoLangs[key]!["name"];
+  getDisplayLanguage(String key) {
+    String cleanedKey = key.split('_')[0];
+    if (isoLangs.containsKey(cleanedKey)) {
+      return isoLangs[cleanedKey]!["name"];
     } else {
       throw Exception("Language key incorrect");
     }

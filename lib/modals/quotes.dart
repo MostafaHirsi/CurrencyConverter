@@ -15,7 +15,8 @@ class QuotesModal extends StatelessWidget {
   Widget build(BuildContext context) {
     SharedPreferencesProvider sharedPreferencesProvider =
         Injector.appInstance.get();
-    List<Quote> quotes = retrieveQuotes(sharedPreferencesProvider);
+    List<Quote> quotes =
+        retrieveQuotes(sharedPreferencesProvider).reversed.toList();
     return Container(
       padding: const EdgeInsets.only(left: 18, right: 18),
       decoration: const BoxDecoration(
@@ -43,7 +44,6 @@ class QuotesModal extends StatelessWidget {
           ),
           Expanded(
             child: ListView.builder(
-              reverse: true,
               itemCount: quotes.length,
               itemBuilder: (context, index) {
                 Quote quote = quotes[index];

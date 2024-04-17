@@ -24,11 +24,80 @@ void main() {
       "type": "fiat"
     });
 
+    Currency usdCurrency = Currency.fromJson({
+      "symbol": "\$",
+      "name": "US Dollar",
+      "symbol_native": "\$",
+      "decimal_digits": 2,
+      "rounding": 0,
+      "code": "USD",
+      "name_plural": "US dollars",
+      "type": "fiat"
+    });
+
+    Currency gbpCurrency = Currency.fromJson({
+      "symbol": "£",
+      "name": "British Pound Sterling",
+      "symbol_native": "£",
+      "decimal_digits": 2,
+      "rounding": 0,
+      "code": "GBP",
+      "name_plural": "British pounds sterling",
+      "type": "fiat"
+    });
     blocTest(
       'emits [] when nothing is added ',
-      build: () => HomeBloc(
-          [euCurrency], currencyApiProvider, sharedPreferencesProvider),
+      build: () => HomeBloc([euCurrency, usdCurrency], currencyApiProvider,
+          sharedPreferencesProvider),
       expect: () => [],
+    );
+
+    blocTest(
+      'emits [HomeInitialised] when ChangeCurrency is added ',
+      build: () => HomeBloc([euCurrency, usdCurrency, gbpCurrency],
+          currencyApiProvider, sharedPreferencesProvider),
+      act: (bloc) => bloc.add(ChangeCurrency(
+          baseCurrency: gbpCurrency, targetCurrency: usdCurrency)),
+      expect: () => [
+        HomeInitialised(
+          baseCurrency: gbpCurrency,
+          targetCurrency: usdCurrency,
+          baseValue: 0,
+          targetValue: 0,
+        )
+      ],
+    );
+
+    blocTest(
+      'emits [HomeInitialised] when FlipCurrency is added ',
+      build: () => HomeBloc([euCurrency, usdCurrency, gbpCurrency],
+          currencyApiProvider, sharedPreferencesProvider),
+      act: (bloc) => bloc.add(FlipCurrency(1.32, 1.60,
+          baseCurrency: gbpCurrency, targetCurrency: usdCurrency)),
+      expect: () => [
+        HomeInitialised(
+          baseCurrency: usdCurrency,
+          targetCurrency: gbpCurrency,
+          baseValue: 1.32,
+          targetValue: 1.60,
+        )
+      ],
+    );
+
+    blocTest(
+      'emits [HomeInitialised] when ChangeCurrency is added ',
+      build: () => HomeBloc([euCurrency, usdCurrency, gbpCurrency],
+          currencyApiProvider, sharedPreferencesProvider),
+      act: (bloc) => bloc.add(ChangeCurrency(
+          baseCurrency: gbpCurrency, targetCurrency: usdCurrency)),
+      expect: () => [
+        HomeInitialised(
+          baseCurrency: gbpCurrency,
+          targetCurrency: usdCurrency,
+          baseValue: 0,
+          targetValue: 0,
+        )
+      ],
     );
   });
 }

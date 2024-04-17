@@ -13,6 +13,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
 import '../mocks/generate_mock_providers.mocks.dart';
+import '../utils/when_extension.dart';
 
 void main() {
   group('App Bloc', () {
@@ -43,6 +44,8 @@ void main() {
       "name_plural": "Euros",
       "type": "fiat"
     });
+    String defaultLocale = 'en';
+
     blocTest(
       'emits [app bloc emits [AppLoading, AppLoaded]] when nothing is added because LoadApp event is sent ',
       setUp: () {
@@ -52,11 +55,14 @@ void main() {
         when(sharedPreferencesProvider
                 .containsKey(SharedPreferencesEnum.themeMode))
             .thenReturn(false);
+
+        when(sharedPreferencesProvider.get(SharedPreferencesEnum.locale))
+            .thenReturn(defaultLocale);
       },
       build: () => AppBloc(currencyApiProvider, sharedPreferencesProvider),
       expect: () => [
         AppLoading(),
-        AppLoaded([euCurrency], ThemeMode.system)
+        AppLoaded([euCurrency], ThemeMode.system, defaultLocale)
       ],
     );
     group('Load App event', () {
@@ -69,11 +75,14 @@ void main() {
           when(sharedPreferencesProvider
                   .containsKey(SharedPreferencesEnum.themeMode))
               .thenReturn(false);
+
+          when(sharedPreferencesProvider.get(SharedPreferencesEnum.locale))
+              .thenReturn(defaultLocale);
         },
         build: () => AppBloc(currencyApiProvider, sharedPreferencesProvider),
         expect: () => [
           AppLoading(),
-          AppLoaded([euCurrency], ThemeMode.system)
+          AppLoaded([euCurrency], ThemeMode.system, defaultLocale)
         ],
       );
       blocTest(
@@ -89,6 +98,9 @@ void main() {
           when(sharedPreferencesProvider
                   .containsKey(SharedPreferencesEnum.themeMode))
               .thenReturn(false);
+
+          when(sharedPreferencesProvider.get(SharedPreferencesEnum.locale))
+              .thenReturn(defaultLocale);
         },
         build: () => AppBloc(currencyApiProvider, sharedPreferencesProvider),
         expect: () => [
@@ -119,15 +131,56 @@ void main() {
           when(sharedPreferencesProvider.set(
                   SharedPreferencesEnum.themeMode, ThemeMode.dark.index))
               .thenAnswer((_) => Future.value(null));
+
+          when(sharedPreferencesProvider.get(SharedPreferencesEnum.locale))
+              .thenReturn(defaultLocale);
         },
         build: () => AppBloc(currencyApiProvider, sharedPreferencesProvider),
         act: (bloc) => bloc.add(UpdateThemeMode(themeMode: ThemeMode.dark)),
         expect: () => [
           AppLoading(),
-          AppLoaded([euCurrency], ThemeMode.system),
-          AppLoaded([euCurrency], ThemeMode.dark),
+          AppLoaded([euCurrency], ThemeMode.system, defaultLocale),
+          AppLoaded([euCurrency], ThemeMode.dark, defaultLocale),
         ],
       );
+
+      group('Update Locale event', () {
+        blocTest(
+          'when new locale is set, app bloc emits [AppLoading, AppLoaded]',
+          setUp: () {
+            List<String> currencyListJson = [jsonEncode(euCurrency.toJson())];
+
+            when(currencyApiProvider.getCurrencies())
+                .thenAnswer((_) => Future.value(currencyList));
+            when(sharedPreferencesProvider
+                    .get(SharedPreferencesEnum.currencies))
+                .thenAnswer((_) => Future.value(currencyListJson));
+            when(sharedPreferencesProvider
+                    .containsKey(SharedPreferencesEnum.themeMode))
+                .thenReturn(true);
+
+            when(sharedPreferencesProvider.get(SharedPreferencesEnum.themeMode))
+                .thenReturn(ThemeMode.system.index);
+
+            when(sharedPreferencesProvider.set(
+                    SharedPreferencesEnum.locale, 'fr'))
+                .thenAnswer((_) => Future.value(null));
+
+            when(sharedPreferencesProvider.get(SharedPreferencesEnum.locale))
+                .thenAnswerOneByOne([
+              'en',
+              'fr',
+            ]);
+          },
+          build: () => AppBloc(currencyApiProvider, sharedPreferencesProvider),
+          act: (bloc) => bloc.add(UpdateLocale(locale: 'fr')),
+          expect: () => [
+            AppLoading(),
+            AppLoaded([euCurrency], ThemeMode.system, defaultLocale),
+            AppLoaded([euCurrency], ThemeMode.system, 'fr'),
+          ],
+        );
+      });
     });
   });
 }
