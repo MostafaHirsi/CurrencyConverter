@@ -43,6 +43,7 @@ ThemeData theme = ThemeData(
 ThemeData darkTheme = ThemeData(
   brightness: Brightness.dark,
   fontFamily: 'Montserrat',
+  splashFactory: NoSplash.splashFactory,
   scaffoldBackgroundColor: Colors.black,
   appBarTheme: const AppBarTheme(
     color: Colors.black,
