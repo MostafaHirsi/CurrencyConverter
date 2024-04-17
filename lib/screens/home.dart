@@ -1,6 +1,9 @@
 import 'package:currency_converter/blocs/home/home_bloc.dart';
+import 'package:currency_converter/modals/currencies_list.dart';
 import 'package:currency_converter/models/currency/currency.dart';
 import 'package:currency_converter/screens/settings.dart';
+import 'package:currency_converter/utils/debouncer.dart';
+import 'package:currency_converter/utils/string_to_double.dart';
 import 'package:currency_converter/widgets/currency_button.dart';
 import 'package:currency_converter/widgets/flip_button.dart';
 import 'package:currency_converter/widgets/number_input.dart';
@@ -19,32 +22,12 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  TextEditingController baseValueController = TextEditingController();
-  TextEditingController targeValueController = TextEditingController();
+  final _debouncer = Debouncer(milliseconds: 500);
+
   @override
   Widget build(BuildContext context) {
     HomeBloc homeBloc = BlocProvider.of(context);
-    Currency usdCurrency = Currency.fromJson({
-      "symbol": "\$",
-      "name": "US Dollar",
-      "symbol_native": "\$",
-      "decimal_digits": 2,
-      "rounding": 0,
-      "code": "USD",
-      "name_plural": "US dollars",
-      "type": "fiat"
-    });
-    Currency gbpCurrency = Currency.fromJson({
-      "symbol": "£",
-      "name": "British Pound Sterling",
-      "symbol_native": "£",
-      "decimal_digits": 2,
-      "rounding": 0,
-      "code": "GBP",
-      "name_plural": "British pounds sterling",
-      "type": "fiat"
-    });
-    return BlocBuilder(
+    return BlocBuilder<HomeBloc, HomeState>(
       bloc: homeBloc,
       builder: (context, state) {
         return Scaffold(
@@ -72,39 +55,41 @@ class _HomeState extends State<Home> {
               children: [
                 Flexible(
                   child: CurrencyButton(
-                    currency: usdCurrency,
+                    currency: state.baseCurrency,
                     onPress: () async {
-                      await showModalBottomSheet(
+                      Currency? selectedCurrency =
+                          await showModalBottomSheet<Currency?>(
                         context: context,
-                        enableDrag: false,
                         isScrollControlled: true,
                         useSafeArea: true,
-                        anchorPoint: Offset.zero,
-                        builder: (context) {
-                          return Container(
-                            decoration: const BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.vertical(
-                                top: Radius.circular(
-                                  40,
-                                ),
-                              ),
-                            ),
-                            child: ListView.builder(
-                              itemCount: homeBloc.currencies.length,
-                              itemBuilder: (context, index) {
-                                return ListTile();
-                              },
-                            ),
-                          );
-                        },
+                        builder: (context) => CurrenciesListModal(
+                            currencies: homeBloc.currencies),
                       );
+                      if (selectedCurrency != null) {
+                        homeBloc.add(
+                          SwitchCurrency(
+                            baseCurrency: selectedCurrency,
+                            targetCurrency: state.targetCurrency,
+                          ),
+                        );
+                      }
                     },
                   ),
                 ),
                 NumberInput(
-                  textEditingController: baseValueController,
-                  symbol: usdCurrency.symbol,
+                  symbol: state.baseCurrency.symbolNative,
+                  onChanged: (value) {
+                    _debouncer.run(
+                      () => homeBloc.add(
+                        ConvertCurrency(
+                          baseCurrency: state.baseCurrency,
+                          targetCurrency: state.targetCurrency,
+                          baseValue: stringToDouble(value),
+                        ),
+                      ),
+                    );
+                  },
+                  value: state.baseValue,
                 ),
                 Container(
                   margin: const EdgeInsets.only(
@@ -122,23 +107,49 @@ class _HomeState extends State<Home> {
                 ),
                 Flexible(
                   child: CurrencyButton(
-                    currency: gbpCurrency,
-                    onPress: () {},
+                    currency: state.targetCurrency,
+                    onPress: () async {
+                      Currency? selectedCurrency =
+                          await showModalBottomSheet<Currency?>(
+                        context: context,
+                        isScrollControlled: true,
+                        useSafeArea: true,
+                        builder: (context) => CurrenciesListModal(
+                            currencies: homeBloc.currencies),
+                      );
+                      if (selectedCurrency != null) {
+                        homeBloc.add(
+                          SwitchCurrency(
+                            baseCurrency: state.baseCurrency,
+                            targetCurrency: selectedCurrency,
+                          ),
+                        );
+                      }
+                    },
                   ),
                 ),
                 NumberInput(
-                  textEditingController: targeValueController,
-                  symbol: gbpCurrency.symbol,
+                  value: state.targetValue,
+                  symbol: state.targetCurrency.symbolNative,
                   enabled: false,
                 ),
                 const Spacer(),
-                Center(
-                  child: PrimaryButton(
-                    text: 'Convert',
-                    onPress: () {},
-                    isLoading: true,
-                  ),
-                )
+                // Center(
+                //   child: PrimaryButton(
+                //     text: 'Convert',
+                //     onPress: () {
+                //       homeBloc.add(
+                //         ConvertCurrency(
+                //           baseCurrency: state.baseCurrency,
+                //           targetCurrency: state.targetCurrency,
+                //           baseValue: stringToDouble(baseValueController.text),
+                //         ),
+                //       );
+                //     },
+                //     isEnabled: stringToDouble(baseValueController.text) > 0,
+                //     isLoading: state is HomeLoading,
+                //   ),
+                // )
               ],
             ),
           ),

@@ -44,9 +44,20 @@ void main() {
       "type": "fiat"
     });
     blocTest(
-      'emits [] when nothing is added',
+      'emits [app bloc emits [AppLoading, AppLoaded]] when nothing is added because LoadApp event is sent ',
+      setUp: () {
+        when(currencyApiProvider.getCurrencies())
+            .thenAnswer((_) => Future.value(currencyList));
+
+        when(sharedPreferencesProvider
+                .containsKey(SharedPreferencesEnum.themeMode))
+            .thenReturn(false);
+      },
       build: () => AppBloc(currencyApiProvider, sharedPreferencesProvider),
-      expect: () => [],
+      expect: () => [
+        AppLoading(),
+        AppLoaded([euCurrency], ThemeMode.system)
+      ],
     );
     group('Load App event', () {
       blocTest(

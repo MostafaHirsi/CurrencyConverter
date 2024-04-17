@@ -1,28 +1,30 @@
 import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import 'package:intl/intl.dart';
 
 class NumberInput extends StatelessWidget {
-  final TextEditingController textEditingController;
+  final double value;
   final String symbol;
   final bool enabled;
+  final Function(String)? onChanged;
   const NumberInput(
       {super.key,
-      required this.textEditingController,
+      required this.value,
       required this.symbol,
-      this.enabled = true});
+      this.enabled = true,
+      this.onChanged});
 
   @override
   Widget build(BuildContext context) {
     String locale = Intl.getCurrentLocale();
-    CurrencyTextInputFormatter formatter =
-        CurrencyTextInputFormatter(symbol: symbol, locale: locale);
-    if (textEditingController.text.isEmpty) {
-      String formattedValue = formatter.format('0.00');
-      textEditingController.text = formattedValue;
-    }
+    CurrencyTextInputFormatter formatter = CurrencyTextInputFormatter(
+        symbol: symbol, locale: locale, decimalDigits: 2);
+    TextEditingController controller =
+        TextEditingController(text: formatter.formatDouble(value));
+    controller.selection = TextSelection.fromPosition(
+        TextPosition(offset: controller.text.length));
+
     return TextField(
       enabled: enabled,
       keyboardType: TextInputType.number,
@@ -32,12 +34,14 @@ class NumberInput extends StatelessWidget {
         letterSpacing: -4,
         fontWeight: FontWeight.w300,
       ),
+      onChanged: onChanged,
+      showCursor: false,
       decoration: const InputDecoration(
         border: UnderlineInputBorder(
           borderSide: BorderSide.none,
         ),
       ),
-      controller: textEditingController,
+      controller: controller,
     );
   }
 }

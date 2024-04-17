@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class PrimaryButton extends StatelessWidget {
   final String text;
   final bool isLoading;
+  final bool isEnabled;
   final Function() onPress;
   const PrimaryButton(
       {super.key,
       required this.text,
       this.isLoading = false,
+      this.isEnabled = true,
       required this.onPress});
 
   @override
@@ -16,7 +18,7 @@ class PrimaryButton extends StatelessWidget {
     double loadingIndicatorPadding = isLoading ? 10 : 0;
     return ElevatedButton(
       style: ElevatedButton.styleFrom(),
-      onPressed: !isLoading ? onPress : null,
+      onPressed: !isLoading && isEnabled ? onPress : null,
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
