@@ -1,6 +1,7 @@
 import 'package:currency_converter/models/currency/currency.dart';
 import 'package:flag/flag_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class CurrenciesListModal extends StatelessWidget {
   final double iconSize = 20;
@@ -10,7 +11,9 @@ class CurrenciesListModal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(top: 32),
+      padding: const EdgeInsetsDirectional.symmetric(
+        horizontal: 18,
+      ),
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.vertical(
           top: Radius.circular(
@@ -18,18 +21,38 @@ class CurrenciesListModal extends StatelessWidget {
           ),
         ),
       ),
-      child: ListView.builder(
-        itemCount: currencies.length,
-        itemBuilder: (context, index) {
-          Currency currency = currencies[index];
-          String code = currency.code.substring(0, 2).toLowerCase();
-          return Column(
-            children: [
-              buildListTile(context, code, currency),
-              buildDivider(),
-            ],
-          );
-        },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            margin: const EdgeInsets.only(
+              bottom: 16,
+            ),
+            child: Text(
+              "Currencies",
+              style: Theme.of(context)
+                  .textTheme
+                  .titleLarge!
+                  .copyWith(fontWeight: FontWeight.bold),
+              textAlign: TextAlign.start,
+            ),
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: currencies.length,
+              itemBuilder: (context, index) {
+                Currency currency = currencies[index];
+                String code = currency.code.substring(0, 2).toLowerCase();
+                return Column(
+                  children: [
+                    buildListTile(context, code, currency),
+                    buildDivider(),
+                  ],
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -44,7 +67,7 @@ class CurrenciesListModal extends StatelessWidget {
   ListTile buildListTile(BuildContext context, String code, Currency currency) {
     return ListTile(
       onTap: () => Navigator.pop(context, currency),
-      contentPadding: const EdgeInsets.symmetric(vertical: 4, horizontal: 18),
+      contentPadding: const EdgeInsets.symmetric(vertical: 4),
       leading: Flag.fromString(
         code,
         width: iconSize,

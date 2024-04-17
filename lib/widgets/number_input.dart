@@ -34,7 +34,7 @@ class NumberInput extends StatelessWidget {
         letterSpacing: -4,
         fontWeight: FontWeight.w300,
       ),
-      onChanged: onChanged,
+      onChanged: enabled ? onChanged : null,
       showCursor: false,
       decoration: const InputDecoration(
         border: UnderlineInputBorder(

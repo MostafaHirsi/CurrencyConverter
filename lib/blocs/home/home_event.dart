@@ -7,8 +7,17 @@ sealed class HomeEvent extends Equatable {
   const HomeEvent({required this.baseCurrency, required this.targetCurrency});
 }
 
-class SwitchCurrency extends HomeEvent {
-  const SwitchCurrency(
+class ChangeCurrency extends HomeEvent {
+  const ChangeCurrency(
+      {required super.baseCurrency, required super.targetCurrency});
+  @override
+  List<Object?> get props => [baseCurrency, targetCurrency];
+}
+
+class FlipCurrency extends HomeEvent {
+  final double targetValue;
+  final double baseValue;
+  const FlipCurrency(this.targetValue, this.baseValue,
       {required super.baseCurrency, required super.targetCurrency});
   @override
   List<Object?> get props => [baseCurrency, targetCurrency];

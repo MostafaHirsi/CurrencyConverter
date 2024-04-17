@@ -10,6 +10,8 @@ import '../mocks/generate_mock_providers.mocks.dart';
 void main() {
   group('Home Bloc', () {
     final CurrencyApiProvider currencyApiProvider = MockCurrencyApiProvider();
+    final SharedPreferencesProvider sharedPreferencesProvider =
+        MockSharedPreferencesProvider();
 
     Currency euCurrency = Currency.fromJson({
       "symbol": "€",
@@ -21,11 +23,13 @@ void main() {
       "name_plural": "Euros",
       "type": "fiat"
     });
-    HomeBloc homeBloc = HomeBloc([euCurrency], currencyApiProvider);
+    HomeBloc homeBloc =
+        HomeBloc([euCurrency], currencyApiProvider, sharedPreferencesProvider);
 
     blocTest(
       'emits [] when nothing is added ',
-      build: () => HomeBloc([euCurrency], currencyApiProvider),
+      build: () => HomeBloc(
+          [euCurrency], currencyApiProvider, sharedPreferencesProvider),
       expect: () => [],
     );
   });

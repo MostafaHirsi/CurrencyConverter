@@ -13,7 +13,7 @@ void main() {
           Widget myWidget = MaterialApp(
             home: Scaffold(
               body: NumberInput(
-                textEditingController: textEditingController,
+                value: 0,
                 symbol: symbol,
               ),
             ),
@@ -30,7 +30,7 @@ void main() {
             home: Scaffold(
               body: NumberInput(
                 key: textFieldKey,
-                textEditingController: textEditingController,
+                value: 0,
                 symbol: symbol,
               ),
             ),
@@ -50,7 +50,7 @@ void main() {
             home: Scaffold(
               body: NumberInput(
                 key: textFieldKey,
-                textEditingController: textEditingController,
+                value: 0,
                 symbol: symbol,
               ),
             ),
@@ -69,7 +69,7 @@ void main() {
             home: Scaffold(
               body: NumberInput(
                 key: textFieldKey,
-                textEditingController: textEditingController,
+                value: 0,
                 symbol: symbol,
                 enabled: false,
               ),
