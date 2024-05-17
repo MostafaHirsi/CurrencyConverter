@@ -46,3 +46,13 @@ I've added alot of tests to the project to try test as much functionality as pos
 - Unit tests: tests individual functions and components like the currency api provider
 - Widget tests: tests widgets like the currency button 
 - Integration tests: End to end tests for flows (haven't got round to making one yet)
+
+
+# Screen Recordings
+
+## iOS 
+https://github.com/MostafaHirsi/CurrencyConverter/assets/18057776/dc16aa6d-24e2-4274-bdb5-cbf7a0d9e223
+
+
+# Android
+https://github.com/MostafaHirsi/CurrencyConverter/assets/18057776/fe815964-7f46-4469-8de9-e6bd1dda702f
