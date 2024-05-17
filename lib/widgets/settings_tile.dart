@@ -1,4 +1,3 @@
-import 'package:currency_converter/utils/language_local.dart';
 import 'package:flutter/material.dart';
 
 class SettingsTile extends StatelessWidget {

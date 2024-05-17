@@ -4,7 +4,7 @@ import 'package:currency_converter/utils/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:injector/injector.dart';
+import 'package:go_router/go_router.dart';
 
 class Splash extends StatefulWidget {
   final ThemeMode themeMode;
@@ -22,13 +22,21 @@ class _SplashState extends State<Splash> {
   Widget build(BuildContext context) {
     bool darkMode = widget.themeMode == ThemeMode.dark;
     AppBloc appBloc = BlocProvider.of(context);
-    GlobalKey<NavigatorState> navigatorKey = Injector.appInstance.get();
     return BlocListener(
       bloc: appBloc,
       listener: (context, state) async {
         if (state is AppLoaded) {
-          await navigatorKey.currentState!.pushReplacementNamed(Home.routeName,
-              arguments: state.currencies);
+          context.go(Home.routeName, extra: state.currencies);
+        }
+        if (state is AppError) {
+          showDialog(
+            context: context,
+            builder: (context) {
+              return SimpleDialog(
+                title: Text(state.message),
+              );
+            },
+          );
         }
       },
       child: Scaffold(

@@ -31,7 +31,9 @@ class _HomeState extends State<Home> {
       bloc: homeBloc,
       builder: (context, state) {
         return Scaffold(
-          appBar: HomeAppBar(),
+          appBar: HomeAppBar(
+            context: context,
+          ),
           floatingActionButton: FloatingActionButton(
             child: const Icon(Icons.history),
             onPressed: () async {

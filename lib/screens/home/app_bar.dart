@@ -1,9 +1,10 @@
 import 'package:currency_converter/screens/settings/settings.dart';
 import 'package:flutter/material.dart';
-import 'package:injector/injector.dart';
+import 'package:go_router/go_router.dart';
 
 class HomeAppBar extends AppBar {
-  HomeAppBar({super.key});
+  final BuildContext context;
+  HomeAppBar({super.key, required this.context});
 
   @override
   List<Widget> get actions => [
@@ -20,7 +21,6 @@ class HomeAppBar extends AppBar {
   }
 
   void navigateToSettings() {
-    GlobalKey<NavigatorState> navigatorKey = Injector.appInstance.get();
-    navigatorKey.currentState!.pushNamed(Settings.routeName);
+    context.go(Settings.routeName);
   }
 }

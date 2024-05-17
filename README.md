@@ -1,4 +1,4 @@
-# Currency Converter
+# Currency Calc
 
 An app to convert one currency to another
 
@@ -20,7 +20,7 @@ To support additional languages, please visit the tutorial on
 [Internationalizing Flutter
 apps](https://flutter.dev/docs/development/accessibility-and-localization/internationalization)
 
-# Currency Converter
+# Currency Calc
 To get started please make sure to have the following flutter requirements:
 - Flutter v3.19.4
 - Android SDK version 33.0.1

@@ -4,7 +4,7 @@ description: An app to convert one currency to another
 # Prevent accidental publishing to pub.dev.
 publish_to: 'none'
 
-version: 1.0.0+1
+version: 1.0.4+4
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
@@ -37,6 +37,8 @@ dependencies:
   currency_text_input_formatter: ^2.1.11
   cupertino_icons: ^1.0.6
   flag: ^7.0.0
+  path_provider: ^2.1.3
+  go_router: ^14.1.1
 
 dev_dependencies:
   flutter_test:
