@@ -2,6 +2,7 @@ import 'package:currency_converter/models/currency_list/currency_list.dart';
 import 'package:currency_converter/models/exchange_rate/exchange_rate.dart';
 import 'package:currency_converter/models/status/status.dart';
 import 'package:dio/dio.dart';
+import 'package:intl/intl.dart';
 import 'package:sprintf/sprintf.dart';
 
 class CurrencyApiProvider {
@@ -38,6 +39,26 @@ class CurrencyApiProvider {
         queryParameters: queryParams);
 
     ExchangeRate exchangeRate = ExchangeRate.fromJson(response.data);
+    return exchangeRate;
+  }
+
+  Future<ExchangeRate> getHistoricalExchangeRate(DateTime date,
+      {String baseCurrency = 'USD'}) async {
+    final DateFormat formatter = DateFormat('yyyy-MM-dd');
+    final String formatted = formatter.format(date);
+
+    String params = baseCurrency.isNotEmpty ? '&base_currency=GBP' : '';
+    Map<String, dynamic> queryParams = {
+      "apikey": _dio.options.queryParameters['apikey'],
+      "base_currency": baseCurrency,
+      "date": formatted
+    };
+    Response response = await _dio.get(
+        sprintf(endpoint, ['historical', params]),
+        queryParameters: queryParams);
+
+    ExchangeRate exchangeRate =
+        ExchangeRate.fromJson({"data": response.data['data'][formatted]});
     return exchangeRate;
   }
 }

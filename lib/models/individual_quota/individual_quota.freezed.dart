@@ -24,8 +24,12 @@ mixin _$IndividualQuota {
   int get used => throw _privateConstructorUsedError;
   int get remaining => throw _privateConstructorUsedError;
 
+  /// Serializes this IndividualQuota to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of IndividualQuota
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $IndividualQuotaCopyWith<IndividualQuota> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -49,6 +53,8 @@ class _$IndividualQuotaCopyWithImpl<$Res, $Val extends IndividualQuota>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of IndividualQuota
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -92,6 +98,8 @@ class __$$IndividualQuotaImplCopyWithImpl<$Res>
       _$IndividualQuotaImpl _value, $Res Function(_$IndividualQuotaImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of IndividualQuota
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -160,11 +168,13 @@ class _$IndividualQuotaImpl
                 other.remaining == remaining));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, total, used, remaining);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of IndividualQuota
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$IndividualQuotaImplCopyWith<_$IndividualQuotaImpl> get copyWith =>
@@ -194,8 +204,11 @@ abstract class _IndividualQuota implements IndividualQuota {
   int get used;
   @override
   int get remaining;
+
+  /// Create a copy of IndividualQuota
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$IndividualQuotaImplCopyWith<_$IndividualQuotaImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

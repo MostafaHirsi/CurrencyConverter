@@ -26,7 +26,8 @@ class _SplashState extends State<Splash> {
       bloc: appBloc,
       listener: (context, state) async {
         if (state is AppLoaded) {
-          context.go(Home.routeName, extra: state.currencies);
+          Navigator.pushNamed(context, Home.routeName,
+              arguments: state.currencies);
         }
         if (state is AppError) {
           showDialog(
@@ -43,7 +44,7 @@ class _SplashState extends State<Splash> {
         body: Container(
           alignment: Alignment.center,
           child: SvgPicture.asset(
-            darkMode ? SvgAssets.logo_dark : SvgAssets.logo,
+            darkMode ? SvgAssets.logoDark : SvgAssets.logo,
             width: 220,
           ),
         ),

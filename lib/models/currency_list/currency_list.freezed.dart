@@ -22,8 +22,12 @@ CurrencyList _$CurrencyListFromJson(Map<String, dynamic> json) {
 mixin _$CurrencyList {
   Map<String, Currency> get data => throw _privateConstructorUsedError;
 
+  /// Serializes this CurrencyList to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of CurrencyList
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $CurrencyListCopyWith<CurrencyList> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -47,6 +51,8 @@ class _$CurrencyListCopyWithImpl<$Res, $Val extends CurrencyList>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of CurrencyList
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -80,6 +86,8 @@ class __$$CurrencyListImplCopyWithImpl<$Res>
       _$CurrencyListImpl _value, $Res Function(_$CurrencyListImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of CurrencyList
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -132,12 +140,14 @@ class _$CurrencyListImpl with DiagnosticableTreeMixin implements _CurrencyList {
             const DeepCollectionEquality().equals(other._data, _data));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_data));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CurrencyList
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$CurrencyListImplCopyWith<_$CurrencyListImpl> get copyWith =>
@@ -160,8 +170,11 @@ abstract class _CurrencyList implements CurrencyList {
 
   @override
   Map<String, Currency> get data;
+
+  /// Create a copy of CurrencyList
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CurrencyListImplCopyWith<_$CurrencyListImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

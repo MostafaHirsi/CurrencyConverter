@@ -9,9 +9,9 @@ part of 'individual_quota.dart';
 _$IndividualQuotaImpl _$$IndividualQuotaImplFromJson(
         Map<String, dynamic> json) =>
     _$IndividualQuotaImpl(
-      total: json['total'] as int,
-      used: json['used'] as int,
-      remaining: json['remaining'] as int,
+      total: (json['total'] as num).toInt(),
+      used: (json['used'] as num).toInt(),
+      remaining: (json['remaining'] as num).toInt(),
     );
 
 Map<String, dynamic> _$$IndividualQuotaImplToJson(

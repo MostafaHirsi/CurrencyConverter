@@ -24,7 +24,7 @@ void main() {
       group('and user enters 10 into number input', () {
         testWidgets('then should display a value of \$0.10',
             (WidgetTester tester) async {
-          Key textFieldKey = Key('textField');
+          Key textFieldKey = const Key('textField');
           Widget myWidget = MaterialApp(
             home: Scaffold(
               body: NumberInput(
@@ -44,7 +44,7 @@ void main() {
       group('and user enters 100000 into number input', () {
         testWidgets('then should display a value of \$1,000.00',
             (WidgetTester tester) async {
-          Key textFieldKey = Key('textField');
+          Key textFieldKey = const Key('textField');
           Widget myWidget = MaterialApp(
             home: Scaffold(
               body: NumberInput(
@@ -63,7 +63,7 @@ void main() {
       group('and number input is not enabled', () {
         testWidgets('then should display a value of \$0.00',
             (WidgetTester tester) async {
-          Key textFieldKey = Key('textField');
+          Key textFieldKey = const Key('textField');
           Widget myWidget = MaterialApp(
             home: Scaffold(
               body: NumberInput(

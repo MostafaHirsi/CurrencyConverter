@@ -26,9 +26,14 @@ mixin _$Quote {
   String get targetCurrencyName => throw _privateConstructorUsedError;
   double get baseValue => throw _privateConstructorUsedError;
   double get targetValue => throw _privateConstructorUsedError;
+  DateTime? get selectedDate => throw _privateConstructorUsedError;
 
+  /// Serializes this Quote to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Quote
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $QuoteCopyWith<Quote> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -43,7 +48,8 @@ abstract class $QuoteCopyWith<$Res> {
       String baseCurrencyName,
       String targetCurrencyName,
       double baseValue,
-      double targetValue});
+      double targetValue,
+      DateTime? selectedDate});
 }
 
 /// @nodoc
@@ -56,6 +62,8 @@ class _$QuoteCopyWithImpl<$Res, $Val extends Quote>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Quote
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -65,6 +73,7 @@ class _$QuoteCopyWithImpl<$Res, $Val extends Quote>
     Object? targetCurrencyName = null,
     Object? baseValue = null,
     Object? targetValue = null,
+    Object? selectedDate = freezed,
   }) {
     return _then(_value.copyWith(
       baseCurrencyCode: null == baseCurrencyCode
@@ -91,6 +100,10 @@ class _$QuoteCopyWithImpl<$Res, $Val extends Quote>
           ? _value.targetValue
           : targetValue // ignore: cast_nullable_to_non_nullable
               as double,
+      selectedDate: freezed == selectedDate
+          ? _value.selectedDate
+          : selectedDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ) as $Val);
   }
 }
@@ -108,7 +121,8 @@ abstract class _$$QuoteImplCopyWith<$Res> implements $QuoteCopyWith<$Res> {
       String baseCurrencyName,
       String targetCurrencyName,
       double baseValue,
-      double targetValue});
+      double targetValue,
+      DateTime? selectedDate});
 }
 
 /// @nodoc
@@ -119,6 +133,8 @@ class __$$QuoteImplCopyWithImpl<$Res>
       _$QuoteImpl _value, $Res Function(_$QuoteImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Quote
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -128,6 +144,7 @@ class __$$QuoteImplCopyWithImpl<$Res>
     Object? targetCurrencyName = null,
     Object? baseValue = null,
     Object? targetValue = null,
+    Object? selectedDate = freezed,
   }) {
     return _then(_$QuoteImpl(
       baseCurrencyCode: null == baseCurrencyCode
@@ -154,6 +171,10 @@ class __$$QuoteImplCopyWithImpl<$Res>
           ? _value.targetValue
           : targetValue // ignore: cast_nullable_to_non_nullable
               as double,
+      selectedDate: freezed == selectedDate
+          ? _value.selectedDate
+          : selectedDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
@@ -168,7 +189,8 @@ class _$QuoteImpl with DiagnosticableTreeMixin implements _Quote {
       required this.baseCurrencyName,
       required this.targetCurrencyName,
       required this.baseValue,
-      required this.targetValue});
+      required this.targetValue,
+      this.selectedDate});
 
   factory _$QuoteImpl.fromJson(Map<String, dynamic> json) =>
       _$$QuoteImplFromJson(json);
@@ -185,10 +207,12 @@ class _$QuoteImpl with DiagnosticableTreeMixin implements _Quote {
   final double baseValue;
   @override
   final double targetValue;
+  @override
+  final DateTime? selectedDate;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Quote(baseCurrencyCode: $baseCurrencyCode, targetCurrencyCode: $targetCurrencyCode, baseCurrencyName: $baseCurrencyName, targetCurrencyName: $targetCurrencyName, baseValue: $baseValue, targetValue: $targetValue)';
+    return 'Quote(baseCurrencyCode: $baseCurrencyCode, targetCurrencyCode: $targetCurrencyCode, baseCurrencyName: $baseCurrencyName, targetCurrencyName: $targetCurrencyName, baseValue: $baseValue, targetValue: $targetValue, selectedDate: $selectedDate)';
   }
 
   @override
@@ -201,7 +225,8 @@ class _$QuoteImpl with DiagnosticableTreeMixin implements _Quote {
       ..add(DiagnosticsProperty('baseCurrencyName', baseCurrencyName))
       ..add(DiagnosticsProperty('targetCurrencyName', targetCurrencyName))
       ..add(DiagnosticsProperty('baseValue', baseValue))
-      ..add(DiagnosticsProperty('targetValue', targetValue));
+      ..add(DiagnosticsProperty('targetValue', targetValue))
+      ..add(DiagnosticsProperty('selectedDate', selectedDate));
   }
 
   @override
@@ -220,10 +245,12 @@ class _$QuoteImpl with DiagnosticableTreeMixin implements _Quote {
             (identical(other.baseValue, baseValue) ||
                 other.baseValue == baseValue) &&
             (identical(other.targetValue, targetValue) ||
-                other.targetValue == targetValue));
+                other.targetValue == targetValue) &&
+            (identical(other.selectedDate, selectedDate) ||
+                other.selectedDate == selectedDate));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -232,9 +259,12 @@ class _$QuoteImpl with DiagnosticableTreeMixin implements _Quote {
       baseCurrencyName,
       targetCurrencyName,
       baseValue,
-      targetValue);
+      targetValue,
+      selectedDate);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Quote
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$QuoteImplCopyWith<_$QuoteImpl> get copyWith =>
@@ -255,7 +285,8 @@ abstract class _Quote implements Quote {
       required final String baseCurrencyName,
       required final String targetCurrencyName,
       required final double baseValue,
-      required final double targetValue}) = _$QuoteImpl;
+      required final double targetValue,
+      final DateTime? selectedDate}) = _$QuoteImpl;
 
   factory _Quote.fromJson(Map<String, dynamic> json) = _$QuoteImpl.fromJson;
 
@@ -272,7 +303,12 @@ abstract class _Quote implements Quote {
   @override
   double get targetValue;
   @override
-  @JsonKey(ignore: true)
+  DateTime? get selectedDate;
+
+  /// Create a copy of Quote
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$QuoteImplCopyWith<_$QuoteImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

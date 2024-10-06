@@ -42,7 +42,7 @@ class CurrencyButton extends StatelessWidget {
               right: 6,
             ),
             child: Text(
-              '${currency.symbolNative} ${currency.code} - ${currency.name} ',
+              '${currency.symbolNative} ${currency.code} ',
               style: const TextStyle(
                 letterSpacing: 0,
                 wordSpacing: 0,

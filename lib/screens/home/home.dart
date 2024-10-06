@@ -7,6 +7,7 @@ import 'package:currency_converter/screens/home/app_bar.dart';
 import 'package:currency_converter/utils/debouncer.dart';
 import 'package:currency_converter/utils/string_to_double.dart';
 import 'package:currency_converter/widgets/currency_button.dart';
+import 'package:currency_converter/widgets/date_button.dart';
 import 'package:currency_converter/widgets/flip_button.dart';
 import 'package:currency_converter/widgets/number_input.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +24,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final _debouncer = Debouncer(milliseconds: 500);
+  DateTime _selectedDateTime = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -49,9 +51,17 @@ class _HomeState extends State<Home> {
                     (currency) => currency.code == quote.baseCurrencyCode);
                 Currency targetCurrency = homeBloc.currencies.firstWhere(
                     (currency) => currency.code == quote.targetCurrencyCode);
-                homeBloc.add(ChangeCurrency(
+                DateTime quoteDate = quote.selectedDate ?? DateTime.now();
+                _selectedDateTime = quoteDate;
+                homeBloc.add(
+                  ChangeCurrency(
                     baseCurrency: baseCurrency,
-                    targetCurrency: targetCurrency));
+                    targetCurrency: targetCurrency,
+                    baseValue: quote.baseValue,
+                    targetValue: quote.targetValue,
+                    selectedDate: quoteDate,
+                  ),
+                );
               }
             },
           ),
@@ -63,7 +73,30 @@ class _HomeState extends State<Home> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                buildCurrencyButton(context, homeBloc),
+                Row(
+                  children: [
+                    buildCurrencyButton(context, homeBloc),
+                    const Spacer(),
+                    DateButton(
+                      onPressed: (selectedDateTime) {
+                        _selectedDateTime = selectedDateTime;
+                        HomeState state = homeBloc.state;
+                        Currency baseCurrency = state.baseCurrency;
+                        Currency targetCurrency = state.targetCurrency;
+                        double baseValue = state.baseValue;
+                        homeBloc.add(
+                          ConvertCurrency(
+                            baseCurrency: baseCurrency,
+                            targetCurrency: targetCurrency,
+                            baseValue: baseValue,
+                            selectedDate: selectedDateTime,
+                          ),
+                        );
+                      },
+                      selectedDate: _selectedDateTime,
+                    )
+                  ],
+                ),
                 buildNumberInput(homeBloc),
                 buildDivider(homeBloc),
                 buildCurrencyButton(context, homeBloc, isBase: false),
@@ -87,10 +120,10 @@ class _HomeState extends State<Home> {
         _debouncer.run(
           () => homeBloc.add(
             ConvertCurrency(
-              baseCurrency: state.baseCurrency,
-              targetCurrency: state.targetCurrency,
-              baseValue: stringToDouble(value),
-            ),
+                baseCurrency: state.baseCurrency,
+                targetCurrency: state.targetCurrency,
+                baseValue: stringToDouble(value),
+                selectedDate: DateTime.now()),
           ),
         );
       },
@@ -117,6 +150,7 @@ class _HomeState extends State<Home> {
                   state.targetValue,
                   baseCurrency: state.baseCurrency,
                   targetCurrency: state.targetCurrency,
+                  selectedDate: DateTime.now(),
                 ),
               );
             },
@@ -146,6 +180,7 @@ class _HomeState extends State<Home> {
             ChangeCurrency(
               baseCurrency: isBase ? selectedCurrency : state.baseCurrency,
               targetCurrency: isBase ? state.targetCurrency : selectedCurrency,
+              selectedDate: DateTime.now(),
             ),
           );
         }

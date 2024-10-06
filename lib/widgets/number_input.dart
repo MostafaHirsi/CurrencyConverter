@@ -18,7 +18,7 @@ class NumberInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String defaultLocale = Platform.localeName;
-    CurrencyTextInputFormatter formatter = CurrencyTextInputFormatter(
+    CurrencyTextInputFormatter formatter = CurrencyTextInputFormatter.currency(
       symbol: symbol,
       locale: defaultLocale,
       decimalDigits: 2,

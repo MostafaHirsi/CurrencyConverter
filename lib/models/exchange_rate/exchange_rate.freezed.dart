@@ -22,8 +22,12 @@ ExchangeRate _$ExchangeRateFromJson(Map<String, dynamic> json) {
 mixin _$ExchangeRate {
   Map<String, double> get data => throw _privateConstructorUsedError;
 
+  /// Serializes this ExchangeRate to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ExchangeRate
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ExchangeRateCopyWith<ExchangeRate> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -47,6 +51,8 @@ class _$ExchangeRateCopyWithImpl<$Res, $Val extends ExchangeRate>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ExchangeRate
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -80,6 +86,8 @@ class __$$ExchangeRateImplCopyWithImpl<$Res>
       _$ExchangeRateImpl _value, $Res Function(_$ExchangeRateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ExchangeRate
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -132,12 +140,14 @@ class _$ExchangeRateImpl with DiagnosticableTreeMixin implements _ExchangeRate {
             const DeepCollectionEquality().equals(other._data, _data));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_data));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ExchangeRate
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ExchangeRateImplCopyWith<_$ExchangeRateImpl> get copyWith =>
@@ -160,8 +170,11 @@ abstract class _ExchangeRate implements ExchangeRate {
 
   @override
   Map<String, double> get data;
+
+  /// Create a copy of ExchangeRate
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ExchangeRateImplCopyWith<_$ExchangeRateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

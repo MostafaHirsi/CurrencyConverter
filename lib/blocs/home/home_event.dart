@@ -3,24 +3,39 @@ part of 'home_bloc.dart';
 sealed class HomeEvent extends Equatable {
   final Currency baseCurrency;
   final Currency targetCurrency;
+  final DateTime selectedDate;
 
-  const HomeEvent({required this.baseCurrency, required this.targetCurrency});
+  const HomeEvent({
+    required this.baseCurrency,
+    required this.targetCurrency,
+    required this.selectedDate,
+  });
 }
 
 class ChangeCurrency extends HomeEvent {
-  const ChangeCurrency(
-      {required super.baseCurrency, required super.targetCurrency});
+  final double? targetValue;
+  final double? baseValue;
+  const ChangeCurrency({
+    required super.baseCurrency,
+    required super.targetCurrency,
+    required super.selectedDate,
+    this.targetValue = 0.0,
+    this.baseValue = 0.0,
+  });
   @override
-  List<Object?> get props => [baseCurrency, targetCurrency];
+  List<Object?> get props =>
+      [baseCurrency, targetCurrency, selectedDate, baseValue, targetValue];
 }
 
 class FlipCurrency extends HomeEvent {
   final double targetValue;
   final double baseValue;
   const FlipCurrency(this.targetValue, this.baseValue,
-      {required super.baseCurrency, required super.targetCurrency});
+      {required super.baseCurrency,
+      required super.targetCurrency,
+      required super.selectedDate});
   @override
-  List<Object?> get props => [baseCurrency, targetCurrency];
+  List<Object?> get props => [baseCurrency, targetCurrency, selectedDate];
 }
 
 class ConvertCurrency extends HomeEvent {
@@ -28,8 +43,10 @@ class ConvertCurrency extends HomeEvent {
   const ConvertCurrency(
       {required this.baseValue,
       required super.baseCurrency,
-      required super.targetCurrency});
+      required super.targetCurrency,
+      required super.selectedDate});
 
   @override
-  List<Object?> get props => [baseCurrency, targetCurrency, baseValue];
+  List<Object?> get props =>
+      [baseCurrency, targetCurrency, baseValue, selectedDate];
 }

@@ -7,7 +7,7 @@ part of 'status.dart';
 // **************************************************************************
 
 _$StatusImpl _$$StatusImplFromJson(Map<String, dynamic> json) => _$StatusImpl(
-      accountId: json['account_id'] as int,
+      accountId: (json['account_id'] as num).toInt(),
       quotas: Quotas.fromJson(json['quotas'] as Map<String, dynamic>),
     );
 

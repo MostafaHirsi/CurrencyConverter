@@ -128,6 +128,27 @@ class MockCurrencyApiProvider extends _i1.Mock
           ),
         )),
       ) as _i7.Future<_i4.ExchangeRate>);
+
+  @override
+  _i7.Future<_i4.ExchangeRate> getHistoricalExchangeRate(
+    DateTime? date, {
+    String? baseCurrency = r'USD',
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getHistoricalExchangeRate,
+          [date],
+          {#baseCurrency: baseCurrency},
+        ),
+        returnValue: _i7.Future<_i4.ExchangeRate>.value(_FakeExchangeRate_2(
+          this,
+          Invocation.method(
+            #getHistoricalExchangeRate,
+            [date],
+            {#baseCurrency: baseCurrency},
+          ),
+        )),
+      ) as _i7.Future<_i4.ExchangeRate>);
 }
 
 /// A class which mocks [SharedPreferencesProvider].

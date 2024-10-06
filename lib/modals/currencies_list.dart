@@ -1,7 +1,6 @@
 import 'package:currency_converter/models/currency/currency.dart';
 import 'package:flag/flag_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CurrenciesListModal extends StatelessWidget {

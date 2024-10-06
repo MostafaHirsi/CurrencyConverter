@@ -13,6 +13,9 @@ _$QuoteImpl _$$QuoteImplFromJson(Map<String, dynamic> json) => _$QuoteImpl(
       targetCurrencyName: json['target_currency_name'] as String,
       baseValue: (json['base_value'] as num).toDouble(),
       targetValue: (json['target_value'] as num).toDouble(),
+      selectedDate: json['selected_date'] == null
+          ? null
+          : DateTime.parse(json['selected_date'] as String),
     );
 
 Map<String, dynamic> _$$QuoteImplToJson(_$QuoteImpl instance) =>
@@ -23,4 +26,5 @@ Map<String, dynamic> _$$QuoteImplToJson(_$QuoteImpl instance) =>
       'target_currency_name': instance.targetCurrencyName,
       'base_value': instance.baseValue,
       'target_value': instance.targetValue,
+      'selected_date': instance.selectedDate?.toIso8601String(),
     };

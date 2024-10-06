@@ -6,6 +6,7 @@ import 'package:flag/flag_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:injector/injector.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intl/intl.dart';
 
 class QuotesModal extends StatelessWidget {
   final double iconSize = 20;
@@ -73,6 +74,9 @@ class QuotesModal extends StatelessWidget {
     Flag targetFlag = getFlag(quote.targetCurrencyCode, iconSize);
     String baseValue = quote.baseValue.toStringAsFixed(2);
     String targetValue = quote.targetValue.toStringAsFixed(2);
+    final DateTime dateToFormat = quote.selectedDate ?? DateTime.now();
+    final DateFormat formatter = DateFormat('dd-MM-yyyy');
+    String formattedDate = formatter.format(dateToFormat);
     return ListTile(
       onTap: () => Navigator.pop(context, quote),
       contentPadding: const EdgeInsets.symmetric(vertical: 4),
@@ -101,9 +105,12 @@ class QuotesModal extends StatelessWidget {
         ),
       ),
       subtitle: Text(
-        '$baseValue - $targetValue',
+        formattedDate,
       ),
-      trailing: const Icon(Icons.chevron_right),
+      trailing: Text(
+        '$baseValue → $targetValue',
+        style: Theme.of(context).textTheme.titleSmall,
+      ),
     );
   }
 }

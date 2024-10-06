@@ -21,6 +21,9 @@ class HomeAppBar extends AppBar {
   }
 
   void navigateToSettings() {
-    context.go(Settings.routeName);
+    Navigator.pushNamed(
+      context,
+      Settings.routeName,
+    );
   }
 }

@@ -14,6 +14,7 @@ class Quote with _$Quote {
     required String targetCurrencyName,
     required double baseValue,
     required double targetValue,
+    DateTime? selectedDate,
   }) = _Quote;
 
   factory Quote.fromJson(Map<String, Object?> json) => _$QuoteFromJson(json);

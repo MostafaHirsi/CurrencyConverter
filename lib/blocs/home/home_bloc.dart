@@ -34,8 +34,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
             HomeInitialised(
               baseCurrency: event.baseCurrency,
               targetCurrency: event.targetCurrency,
-              baseValue: 0.0,
-              targetValue: 0.0,
+              baseValue: event.baseValue ?? 0,
+              targetValue: event.targetValue ?? 0,
             ),
           );
         }
@@ -71,11 +71,18 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         baseCurrency: event.baseCurrency,
         targetCurrency: event.targetCurrency,
         baseValue: event.baseValue,
-        targetValue: 0.0,
+        targetValue: state.targetValue,
       ),
     );
-    ExchangeRate exchangeRate = await currencyApiProvider.getExchangeRate(
-        baseCurrency: event.baseCurrency.code);
+    ExchangeRate exchangeRate;
+    if (_daysBetween(event.selectedDate, DateTime.now()) == 0) {
+      exchangeRate = await currencyApiProvider.getExchangeRate(
+          baseCurrency: event.baseCurrency.code);
+    } else {
+      exchangeRate = await currencyApiProvider.getHistoricalExchangeRate(
+          event.selectedDate,
+          baseCurrency: event.baseCurrency.code);
+    }
     double targetInitialValue =
         exchangeRate.data[event.targetCurrency.code] as double;
 
@@ -96,8 +103,15 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       targetCurrencyName: event.targetCurrency.name,
       baseValue: event.baseValue,
       targetValue: targetValue,
+      selectedDate: event.selectedDate,
     );
 
     await updatePreviousQuotes(quote, sharedPreferencesProvider);
+  }
+
+  int _daysBetween(DateTime from, DateTime to) {
+    from = DateTime(from.year, from.month, from.day);
+    to = DateTime(to.year, to.month, to.day);
+    return (to.difference(from).inHours / 24).round();
   }
 }

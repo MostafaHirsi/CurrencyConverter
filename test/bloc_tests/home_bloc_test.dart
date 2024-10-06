@@ -56,8 +56,13 @@ void main() {
       'emits [HomeInitialised] when ChangeCurrency is added ',
       build: () => HomeBloc([euCurrency, usdCurrency, gbpCurrency],
           currencyApiProvider, sharedPreferencesProvider),
-      act: (bloc) => bloc.add(ChangeCurrency(
-          baseCurrency: gbpCurrency, targetCurrency: usdCurrency)),
+      act: (bloc) => bloc.add(
+        ChangeCurrency(
+          baseCurrency: gbpCurrency,
+          targetCurrency: usdCurrency,
+          selectedDate: DateTime.now(),
+        ),
+      ),
       expect: () => [
         HomeInitialised(
           baseCurrency: gbpCurrency,
@@ -72,8 +77,13 @@ void main() {
       'emits [HomeInitialised] when FlipCurrency is added ',
       build: () => HomeBloc([euCurrency, usdCurrency, gbpCurrency],
           currencyApiProvider, sharedPreferencesProvider),
-      act: (bloc) => bloc.add(FlipCurrency(1.32, 1.60,
-          baseCurrency: gbpCurrency, targetCurrency: usdCurrency)),
+      act: (bloc) => bloc.add(FlipCurrency(
+        1.32,
+        1.60,
+        baseCurrency: gbpCurrency,
+        targetCurrency: usdCurrency,
+        selectedDate: DateTime.now(),
+      )),
       expect: () => [
         HomeInitialised(
           baseCurrency: usdCurrency,
@@ -89,7 +99,10 @@ void main() {
       build: () => HomeBloc([euCurrency, usdCurrency, gbpCurrency],
           currencyApiProvider, sharedPreferencesProvider),
       act: (bloc) => bloc.add(ChangeCurrency(
-          baseCurrency: gbpCurrency, targetCurrency: usdCurrency)),
+        baseCurrency: gbpCurrency,
+        targetCurrency: usdCurrency,
+        selectedDate: DateTime.now(),
+      )),
       expect: () => [
         HomeInitialised(
           baseCurrency: gbpCurrency,

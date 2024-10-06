@@ -23,8 +23,12 @@ mixin _$Status {
   int get accountId => throw _privateConstructorUsedError;
   Quotas get quotas => throw _privateConstructorUsedError;
 
+  /// Serializes this Status to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Status
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $StatusCopyWith<Status> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -48,6 +52,8 @@ class _$StatusCopyWithImpl<$Res, $Val extends Status>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Status
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -66,6 +72,8 @@ class _$StatusCopyWithImpl<$Res, $Val extends Status>
     ) as $Val);
   }
 
+  /// Create a copy of Status
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $QuotasCopyWith<$Res> get quotas {
@@ -96,6 +104,8 @@ class __$$StatusImplCopyWithImpl<$Res>
       _$StatusImpl _value, $Res Function(_$StatusImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Status
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -152,11 +162,13 @@ class _$StatusImpl with DiagnosticableTreeMixin implements _Status {
             (identical(other.quotas, quotas) || other.quotas == quotas));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, accountId, quotas);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Status
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$StatusImplCopyWith<_$StatusImpl> get copyWith =>
@@ -181,8 +193,11 @@ abstract class _Status implements Status {
   int get accountId;
   @override
   Quotas get quotas;
+
+  /// Create a copy of Status
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$StatusImplCopyWith<_$StatusImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -196,8 +211,12 @@ mixin _$Quotas {
   IndividualQuota get month => throw _privateConstructorUsedError;
   IndividualQuota get grace => throw _privateConstructorUsedError;
 
+  /// Serializes this Quotas to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Quotas
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $QuotasCopyWith<Quotas> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -222,6 +241,8 @@ class _$QuotasCopyWithImpl<$Res, $Val extends Quotas>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Quotas
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -240,6 +261,8 @@ class _$QuotasCopyWithImpl<$Res, $Val extends Quotas>
     ) as $Val);
   }
 
+  /// Create a copy of Quotas
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $IndividualQuotaCopyWith<$Res> get month {
@@ -248,6 +271,8 @@ class _$QuotasCopyWithImpl<$Res, $Val extends Quotas>
     });
   }
 
+  /// Create a copy of Quotas
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $IndividualQuotaCopyWith<$Res> get grace {
@@ -280,6 +305,8 @@ class __$$QuotasImplCopyWithImpl<$Res>
       _$QuotasImpl _value, $Res Function(_$QuotasImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Quotas
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -335,11 +362,13 @@ class _$QuotasImpl with DiagnosticableTreeMixin implements _Quotas {
             (identical(other.grace, grace) || other.grace == grace));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, month, grace);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Quotas
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$QuotasImplCopyWith<_$QuotasImpl> get copyWith =>
@@ -364,8 +393,11 @@ abstract class _Quotas implements Quotas {
   IndividualQuota get month;
   @override
   IndividualQuota get grace;
+
+  /// Create a copy of Quotas
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$QuotasImplCopyWith<_$QuotasImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
