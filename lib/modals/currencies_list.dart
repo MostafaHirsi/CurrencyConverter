@@ -1,15 +1,47 @@
+import 'dart:async';
+
 import 'package:currency_converter/models/currency/currency.dart';
+import 'package:currency_converter/utils/colors.dart';
+import 'package:currency_converter/widgets/custom_textfield.dart';
 import 'package:flag/flag_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class CurrenciesListModal extends StatelessWidget {
-  final double iconSize = 20;
+class CurrenciesListModal extends StatefulWidget {
   final List<Currency> currencies;
-  const CurrenciesListModal({super.key, required this.currencies});
+
+  CurrenciesListModal({super.key, required this.currencies});
+
+  @override
+  State<CurrenciesListModal> createState() => _CurrenciesListModalState();
+}
+
+class _CurrenciesListModalState extends State<CurrenciesListModal> {
+  final double iconSize = 20;
+
+  Timer? _debounce;
+
+  String searchTerms = '';
+  final String hint = 'British Pound Sterling';
+  final icon = Icon(Icons.search);
 
   @override
   Widget build(BuildContext context) {
+    List currencyList = searchTerms.isNotEmpty
+        ? widget.currencies.where((currency) {
+            bool isCodePartialMatch =
+                currency.code.toLowerCase().contains(searchTerms.toLowerCase());
+            bool isNamePartialMatch =
+                currency.name.toLowerCase().contains(searchTerms.toLowerCase());
+
+            bool isSymbolPartialMatch =
+                currency.symbol.contains(searchTerms.toLowerCase()) ||
+                    currency.symbolNative.contains(searchTerms.toLowerCase());
+            return isCodePartialMatch ||
+                isNamePartialMatch ||
+                isSymbolPartialMatch;
+          }).toList()
+        : widget.currencies;
     return Container(
       padding: const EdgeInsetsDirectional.symmetric(
         horizontal: 18,
@@ -37,11 +69,16 @@ class CurrenciesListModal extends StatelessWidget {
               textAlign: TextAlign.start,
             ),
           ),
+          CustomTextfield(
+            hint: hint,
+            icon: icon,
+            onSearchChanged: _onSearchChanged,
+          ),
           Expanded(
             child: ListView.builder(
-              itemCount: currencies.length,
+              itemCount: currencyList.length,
               itemBuilder: (context, index) {
-                Currency currency = currencies[index];
+                Currency currency = currencyList[index];
                 String code = currency.code.substring(0, 2).toLowerCase();
                 return Column(
                   children: [
@@ -85,5 +122,14 @@ class CurrenciesListModal extends StatelessWidget {
       ),
       trailing: const Icon(Icons.chevron_right),
     );
+  }
+
+  _onSearchChanged(String query) {
+    if (_debounce?.isActive ?? false) _debounce?.cancel();
+    _debounce = Timer(const Duration(milliseconds: 500), () {
+      setState(() {
+        searchTerms = query;
+      });
+    });
   }
 }
